@@ -1,9 +1,21 @@
-import { Button } from "@/components/ui/button"
+import Hero from "@/components/home/Hero";
+import TrustBadges from "@/components/home/TrustBadges";
+import Lenders from "@/components/home/Lenders";
+import Features from "@/components/home/Features";
+import HowItWorks from "@/components/home/HowItWorks";
+import Testimonials from "@/components/home/Testimonials";
+import CtaSection from "@/components/home/CtaSection";
 
 export default function Home() {
   return (
-    <div className="flex min-h-svh items-center justify-center">
-      <Button>Click me</Button>
-    </div>
+    <>
+      <Hero />
+      <TrustBadges />
+      <Lenders />
+      <Features />
+      <HowItWorks />
+      <Testimonials />
+      <CtaSection />
+    </>
   )
 }
