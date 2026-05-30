@@ -47,7 +47,7 @@ const TrustBadges = () => {
               >
                 <badge.icon className="w-5 h-5" />
               </div>
-              <h4 className="font-bold text-slate-900 text-lg leading-tight mb-2">{badge.title}</h4>
+              <h3 className="font-bold text-slate-900 text-lg leading-tight mb-2">{badge.title}</h3>
               <p className="text-slate-500 text-sm font-medium leading-relaxed">{badge.desc}</p>
             </div>
           ))}

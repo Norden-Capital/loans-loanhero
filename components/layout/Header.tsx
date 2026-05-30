@@ -144,6 +144,7 @@ const Header = () => {
               </Link>
               
               <button 
+                aria-label="Open Menu"
                 className="md:hidden text-[var(--primary)] p-2 transition-transform active:scale-90"
                 onClick={() => setIsMobileMenuOpen(true)}
               >
@@ -172,6 +173,7 @@ const Header = () => {
         {/* Sidebar Header */}
         <div className="p-6 flex items-center justify-end">
           <button
+            aria-label="Close Menu"
             className="p-2 bg-slate-50 rounded-lg text-slate-400 hover:text-slate-950 transition-colors"
             onClick={() => setIsMobileMenuOpen(false)}
           >
@@ -219,18 +221,18 @@ const Header = () => {
           </Link>
 
           <div className="flex justify-center gap-6">
-            <div className="text-slate-400 hover:text-[var(--primary)] cursor-pointer transition-colors">
+            <Link href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-slate-400 hover:text-[var(--primary)] cursor-pointer transition-colors">
               <FacebookIcon />
-            </div>
-            <div className="text-slate-400 hover:text-[var(--primary)] cursor-pointer transition-colors">
+            </Link>
+            <Link href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="text-slate-400 hover:text-[var(--primary)] cursor-pointer transition-colors">
               <TwitterIcon />
-            </div>
-            <div className="text-slate-400 hover:text-[var(--primary)] cursor-pointer transition-colors">
+            </Link>
+            <Link href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-slate-400 hover:text-[var(--primary)] cursor-pointer transition-colors">
               <InstagramIcon />
-            </div>
-            <div className="text-slate-400 hover:text-[var(--primary)] cursor-pointer transition-colors">
+            </Link>
+            <Link href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-slate-400 hover:text-[var(--primary)] cursor-pointer transition-colors">
               <LinkedinIcon />
-            </div>
+            </Link>
           </div>
           <p className="text-center text-slate-400 text-[10px] mt-6 font-bold uppercase tracking-widest">
             © 2026 LoanHero Canada

@@ -39,7 +39,7 @@ const HowItWorks = () => {
     <section className="bg-slate-50 py-16" id="how-it-works">
       <div className="container mx-auto px-4 md:px-8">
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <p className="text-[var(--primary)] font-bold mb-3 tracking-widest uppercase text-xs">Our Process</p>
+          <p className="text-indigo-700 font-bold mb-3 tracking-widest uppercase text-xs">Our Process</p>
           <h2 className="font-['Space_Grotesk'] text-2xl md:text-3xl font-black text-slate-900 mb-4 tracking-tight px-4">
             Getting your loan is as<br className="md:hidden" /> easy as <span className="bg-gradient-to-r from-[var(--primary)] to-[var(--accent)] bg-clip-text text-transparent">1-2-3</span>
           </h2>

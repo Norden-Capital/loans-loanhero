@@ -40,7 +40,7 @@ const Testimonials = () => {
     <section className="bg-slate-50 py-16 overflow-hidden" id="testimonials">
       <div className="container mx-auto px-4 md:px-8">
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <p className="text-[var(--primary)] font-bold mb-3 tracking-widest uppercase text-xs">Testimonials</p>
+          <p className="text-indigo-700 font-bold mb-3 tracking-widest uppercase text-xs">Testimonials</p>
           <h2 className="font-['Space_Grotesk'] text-2xl md:text-3xl font-bold text-slate-900 mb-4 tracking-tight">
             What Our <span className="bg-gradient-to-r from-[var(--primary)] to-[var(--accent)] bg-clip-text text-transparent">Customers Say</span>
           </h2>
@@ -58,12 +58,14 @@ const Testimonials = () => {
             <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 z-20 flex justify-between px-2 pointer-events-none">
               <button 
                 onClick={prev}
+                aria-label="Previous testimonial"
                 className="w-9 h-9 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center text-slate-600 pointer-events-auto active:scale-90 transition-transform"
               >
                 <ChevronLeft size={18} />
               </button>
               <button 
                 onClick={next}
+                aria-label="Next testimonial"
                 className="w-9 h-9 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center text-slate-600 pointer-events-auto active:scale-90 transition-transform"
               >
                 <ChevronRight size={18} />
@@ -103,8 +105,8 @@ const Testimonials = () => {
                           {t.avatar}
                         </div>
                         <div>
-                          <h4 className="font-bold text-slate-900 text-[15px] leading-none mb-1">{t.author}</h4>
-                          <p className="text-slate-400 font-bold text-[10px] tracking-wide uppercase">{t.location}</p>
+                          <h3 className="font-bold text-slate-900 text-[15px] leading-none mb-1">{t.author}</h3>
+                          <p className="text-slate-500 font-bold text-[10px] tracking-wide uppercase">{t.location}</p>
                         </div>
                       </div>
                     </div>
@@ -118,12 +120,17 @@ const Testimonials = () => {
               {testimonials.map((_, i) => (
                 <button
                   key={i}
+                  aria-label={`Go to testimonial ${i + 1}`}
                   onClick={() => setActiveIndex(i)}
-                  className={cn(
-                    "w-1.5 h-1.5 rounded-full transition-all duration-300",
-                    activeIndex === i ? "w-5 bg-[var(--primary)]" : "bg-slate-300"
-                  )}
-                />
+                  className="p-2 flex items-center justify-center"
+                >
+                  <span
+                    className={cn(
+                      "w-1.5 h-1.5 rounded-full transition-all duration-300",
+                      activeIndex === i ? "w-5 bg-[var(--primary)]" : "bg-slate-400"
+                    )}
+                  />
+                </button>
               ))}
             </div>
           </div>
@@ -160,8 +167,8 @@ const Testimonials = () => {
                     {t.avatar}
                   </div>
                   <div>
-                    <h4 className="font-bold text-slate-900 text-[15px] leading-none mb-1">{t.author}</h4>
-                    <p className="text-slate-400 font-bold text-[10px] tracking-wide uppercase">{t.location}</p>
+                    <h3 className="font-bold text-slate-900 text-[15px] leading-none mb-1">{t.author}</h3>
+                    <p className="text-slate-500 font-bold text-[10px] tracking-wide uppercase">{t.location}</p>
                   </div>
                 </div>
               </div>

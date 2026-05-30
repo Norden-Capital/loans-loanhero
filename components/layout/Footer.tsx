@@ -43,13 +43,16 @@ const Footer = () => {
             </p>
             <div className="flex gap-4">
               {[
-                { icon: FacebookIcon, href: '#' },
-                { icon: TwitterIcon, href: '#' },
-                { icon: InstagramIcon, href: '#' },
-                { icon: LinkedinIcon, href: '#' },
+                { icon: FacebookIcon, href: 'https://facebook.com', label: 'Facebook' },
+                { icon: TwitterIcon, href: 'https://twitter.com', label: 'Twitter' },
+                { icon: InstagramIcon, href: 'https://instagram.com', label: 'Instagram' },
+                { icon: LinkedinIcon, href: 'https://linkedin.com', label: 'LinkedIn' },
               ].map((social, i) => (
                 <Link key={i}
                   href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.label}
                   className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/5 border border-white/5 transition-all hover:scale-110 hover:bg-[var(--primary)] hover:border-transparent text-slate-400 hover:text-white"
                 >
                   <social.icon />
@@ -60,7 +63,7 @@ const Footer = () => {
 
           {/* Services Column */}
           <div className="flex flex-col items-center md:items-start">
-            <h4 className="mb-6 font-bold text-base tracking-tight">Services</h4>
+            <h2 className="mb-6 font-bold text-base tracking-tight">Services</h2>
             <ul className="flex flex-col gap-3 text-sm text-slate-400 font-medium items-center md:items-start">
               <li><Link href="/services" className="transition-colors hover:text-white flex items-center justify-center md:justify-start gap-2 group">Our Services <ArrowRight className="w-3 h-3 opacity-0 translate-x-[-10px] transition-all group-hover:opacity-100 group-hover:translate-x-0" /></Link></li>
               <li><Link href="/services#loan-options" className="transition-colors hover:text-white flex items-center justify-center md:justify-start gap-2 group">Loan Options <ArrowRight className="w-3 h-3 opacity-0 translate-x-[-10px] transition-all group-hover:opacity-100 group-hover:translate-x-0" /></Link></li>
@@ -71,7 +74,7 @@ const Footer = () => {
 
           {/* Help Column */}
           <div className="flex flex-col items-center md:items-start">
-            <h4 className="mb-6 font-bold text-base tracking-tight">Help Centre</h4>
+            <h2 className="mb-6 font-bold text-base tracking-tight">Help Centre</h2>
             <ul className="flex flex-col gap-3 text-sm text-slate-400 font-medium items-center md:items-start">
               <li><Link href="/faq" className="transition-colors hover:text-white flex items-center justify-center md:justify-start gap-2 group">FAQ <ArrowRight className="w-3 h-3 opacity-0 translate-x-[-10px] transition-all group-hover:opacity-100 group-hover:translate-x-0" /></Link></li>
               <li><Link href="/#how-it-works" className="transition-colors hover:text-white flex items-center justify-center md:justify-start gap-2 group">How It Works <ArrowRight className="w-3 h-3 opacity-0 translate-x-[-10px] transition-all group-hover:opacity-100 group-hover:translate-x-0" /></Link></li>
@@ -82,7 +85,7 @@ const Footer = () => {
 
           {/* Contact Column */}
           <div className="flex flex-col items-center md:items-start">
-            <h4 className="mb-6 font-bold text-base tracking-tight">Get in Touch</h4>
+            <h2 className="mb-6 font-bold text-base tracking-tight">Get in Touch</h2>
             <ul className="flex flex-col gap-4 text-sm text-slate-400 font-medium items-center md:items-start">
               <li className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-[var(--primary)] shrink-0">
@@ -107,7 +110,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-16 pt-8 border-t border-white/5 flex flex-col items-center justify-between gap-6 text-[12px] text-slate-500 md:flex-row">
+        <div className="mt-16 pt-8 border-t border-white/5 flex flex-col items-center justify-between gap-6 text-[12px] text-slate-400 md:flex-row">
           <p>© {currentYear} LoanHero Canada. All rights reserved.</p>
           <div className="flex gap-8 font-medium uppercase tracking-widest text-[11px]">
             <Link href="/privacy" className="transition-colors hover:text-white">Privacy Policy</Link>

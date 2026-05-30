@@ -39,7 +39,7 @@ const Features = () => {
     <section className="bg-white py-16">
       <div className="container mx-auto px-4 md:px-8">
         <div className="text-center max-w-2xl mx-auto mb-10">
-          <p className="text-[var(--primary)] font-bold mb-3 tracking-widest uppercase text-[10px]">Advantages</p>
+          <p className="text-indigo-700 font-bold mb-3 tracking-widest uppercase text-[10px]">Advantages</p>
           <h2 className="font-['Space_Grotesk'] text-2xl md:text-3xl font-bold text-slate-900 mb-3 tracking-tight">
             Why Choose <span className="bg-gradient-to-r from-[var(--primary)] to-[var(--accent)] bg-clip-text text-transparent">LoanHero?</span>
           </h2>
