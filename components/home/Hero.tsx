@@ -79,7 +79,6 @@ const Hero = () => {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start px-6 md:px-0">
               <Link 
-                suppressHydrationWarning
                 href="/loan-application" 
                 className="text-white px-8 py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-indigo-500/20 transition-all hover:scale-105 hover:shadow-indigo-500/40 ring-4 ring-indigo-500/10 hover:ring-indigo-500/20"
                 style={{ background: 'var(--gradient-primary)' }}
@@ -87,7 +86,7 @@ const Hero = () => {
                 <Rocket className="w-5 h-5" />
                 Apply Now
               </Link>
-              <Link suppressHydrationWarning href="/contact" className="bg-white/5 text-white px-8 py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 border-2 border-white/5 backdrop-blur-md transition-all hover:scale-105 hover:bg-white/10 hover:border-white/20">
+              <Link href="/contact" className="bg-white/5 text-white px-8 py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 border-2 border-white/5 backdrop-blur-md transition-all hover:scale-105 hover:bg-white/10 hover:border-white/20">
                 <Phone className="w-4 h-4" />
                 Contact Us
               </Link>

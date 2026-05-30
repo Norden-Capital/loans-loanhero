@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import Image from 'next/image';
 import { Marquee } from "@/components/ui/marquee";
 import { cn } from "@/lib/utils";
 
@@ -39,9 +40,11 @@ const PartnersMarquee = () => {
               key={index}
               className="mx-8 flex items-center justify-center transition-all duration-300 w-32 md:w-40 h-16 shrink-0 cursor-pointer"
             >
-              <img 
+              <Image 
                 src={partner.src} 
                 alt={`${partner.name} - Trusted Personal Loan Partner Canada`} 
+                width={160}
+                height={64}
                 className={cn(
                   "w-full h-full object-contain opacity-40 grayscale transition-all duration-500",
                   "hover:opacity-100 hover:grayscale-0 hover:scale-110"

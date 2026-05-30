@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Phone, Mail, Clock, MapPin, ArrowRight } from 'lucide-react';
 
 // Inline SVG Components for Social Icons
@@ -27,10 +28,12 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 text-center md:text-left">
           {/* Brand Column */}
           <div className="flex flex-col items-center md:items-start gap-6">
-            <Link suppressHydrationWarning href="/" className="transition-transform hover:scale-105">
-              <img 
+            <Link href="/" className="transition-transform hover:scale-105">
+              <Image 
                 src="/logo-loanhero.svg" 
                 alt="LoanHero - Fast Personal Loans Canada" 
+                width={160}
+                height={56}
                 className="h-14 w-auto brightness-0 invert" 
               />
             </Link>
@@ -45,7 +48,7 @@ const Footer = () => {
                 { icon: InstagramIcon, href: '#' },
                 { icon: LinkedinIcon, href: '#' },
               ].map((social, i) => (
-                <Link suppressHydrationWarning                   key={i}
+                <Link key={i}
                   href={social.href}
                   className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/5 border border-white/5 transition-all hover:scale-110 hover:bg-[var(--primary)] hover:border-transparent text-slate-400 hover:text-white"
                 >
@@ -59,10 +62,10 @@ const Footer = () => {
           <div className="flex flex-col items-center md:items-start">
             <h4 className="mb-6 font-bold text-base tracking-tight">Services</h4>
             <ul className="flex flex-col gap-3 text-sm text-slate-400 font-medium items-center md:items-start">
-              <li><Link suppressHydrationWarning href="/services" className="transition-colors hover:text-white flex items-center justify-center md:justify-start gap-2 group">Our Services <ArrowRight className="w-3 h-3 opacity-0 translate-x-[-10px] transition-all group-hover:opacity-100 group-hover:translate-x-0" /></Link></li>
-              <li><Link suppressHydrationWarning href="/services#loan-options" className="transition-colors hover:text-white flex items-center justify-center md:justify-start gap-2 group">Loan Options <ArrowRight className="w-3 h-3 opacity-0 translate-x-[-10px] transition-all group-hover:opacity-100 group-hover:translate-x-0" /></Link></li>
-              <li><Link suppressHydrationWarning href="/services#repayment" className="transition-colors hover:text-white flex items-center justify-center md:justify-start gap-2 group">Flexible Repayment <ArrowRight className="w-3 h-3 opacity-0 translate-x-[-10px] transition-all group-hover:opacity-100 group-hover:translate-x-0" /></Link></li>
-              <li><Link suppressHydrationWarning href="/loan-application" className="transition-colors hover:text-white flex items-center justify-center md:justify-start gap-2 group">Apply Now <ArrowRight className="w-3 h-3 opacity-0 translate-x-[-10px] transition-all group-hover:opacity-100 group-hover:translate-x-0" /></Link></li>
+              <li><Link href="/services" className="transition-colors hover:text-white flex items-center justify-center md:justify-start gap-2 group">Our Services <ArrowRight className="w-3 h-3 opacity-0 translate-x-[-10px] transition-all group-hover:opacity-100 group-hover:translate-x-0" /></Link></li>
+              <li><Link href="/services#loan-options" className="transition-colors hover:text-white flex items-center justify-center md:justify-start gap-2 group">Loan Options <ArrowRight className="w-3 h-3 opacity-0 translate-x-[-10px] transition-all group-hover:opacity-100 group-hover:translate-x-0" /></Link></li>
+              <li><Link href="/services#repayment" className="transition-colors hover:text-white flex items-center justify-center md:justify-start gap-2 group">Flexible Repayment <ArrowRight className="w-3 h-3 opacity-0 translate-x-[-10px] transition-all group-hover:opacity-100 group-hover:translate-x-0" /></Link></li>
+              <li><Link href="/loan-application" className="transition-colors hover:text-white flex items-center justify-center md:justify-start gap-2 group">Apply Now <ArrowRight className="w-3 h-3 opacity-0 translate-x-[-10px] transition-all group-hover:opacity-100 group-hover:translate-x-0" /></Link></li>
             </ul>
           </div>
 
@@ -70,10 +73,10 @@ const Footer = () => {
           <div className="flex flex-col items-center md:items-start">
             <h4 className="mb-6 font-bold text-base tracking-tight">Help Centre</h4>
             <ul className="flex flex-col gap-3 text-sm text-slate-400 font-medium items-center md:items-start">
-              <li><Link suppressHydrationWarning href="/faq" className="transition-colors hover:text-white flex items-center justify-center md:justify-start gap-2 group">FAQ <ArrowRight className="w-3 h-3 opacity-0 translate-x-[-10px] transition-all group-hover:opacity-100 group-hover:translate-x-0" /></Link></li>
-              <li><Link suppressHydrationWarning href="/#how-it-works" className="transition-colors hover:text-white flex items-center justify-center md:justify-start gap-2 group">How It Works <ArrowRight className="w-3 h-3 opacity-0 translate-x-[-10px] transition-all group-hover:opacity-100 group-hover:translate-x-0" /></Link></li>
-              <li><Link suppressHydrationWarning href="/#testimonials" className="transition-colors hover:text-white flex items-center justify-center md:justify-start gap-2 group">Customer Reviews <ArrowRight className="w-3 h-3 opacity-0 translate-x-[-10px] transition-all group-hover:opacity-100 group-hover:translate-x-0" /></Link></li>
-              <li><Link suppressHydrationWarning href="/contact" className="transition-colors hover:text-white flex items-center justify-center md:justify-start gap-2 group">Contact Support <ArrowRight className="w-3 h-3 opacity-0 translate-x-[-10px] transition-all group-hover:opacity-100 group-hover:translate-x-0" /></Link></li>
+              <li><Link href="/faq" className="transition-colors hover:text-white flex items-center justify-center md:justify-start gap-2 group">FAQ <ArrowRight className="w-3 h-3 opacity-0 translate-x-[-10px] transition-all group-hover:opacity-100 group-hover:translate-x-0" /></Link></li>
+              <li><Link href="/#how-it-works" className="transition-colors hover:text-white flex items-center justify-center md:justify-start gap-2 group">How It Works <ArrowRight className="w-3 h-3 opacity-0 translate-x-[-10px] transition-all group-hover:opacity-100 group-hover:translate-x-0" /></Link></li>
+              <li><Link href="/#testimonials" className="transition-colors hover:text-white flex items-center justify-center md:justify-start gap-2 group">Customer Reviews <ArrowRight className="w-3 h-3 opacity-0 translate-x-[-10px] transition-all group-hover:opacity-100 group-hover:translate-x-0" /></Link></li>
+              <li><Link href="/contact" className="transition-colors hover:text-white flex items-center justify-center md:justify-start gap-2 group">Contact Support <ArrowRight className="w-3 h-3 opacity-0 translate-x-[-10px] transition-all group-hover:opacity-100 group-hover:translate-x-0" /></Link></li>
             </ul>
           </div>
 
@@ -107,8 +110,8 @@ const Footer = () => {
         <div className="mt-16 pt-8 border-t border-white/5 flex flex-col items-center justify-between gap-6 text-[12px] text-slate-500 md:flex-row">
           <p>© {currentYear} LoanHero Canada. All rights reserved.</p>
           <div className="flex gap-8 font-medium uppercase tracking-widest text-[11px]">
-            <Link suppressHydrationWarning href="/privacy" className="transition-colors hover:text-white">Privacy Policy</Link>
-            <Link suppressHydrationWarning href="/terms" className="transition-colors hover:text-white">Terms of Use</Link>
+            <Link href="/privacy" className="transition-colors hover:text-white">Privacy Policy</Link>
+            <Link href="/terms" className="transition-colors hover:text-white">Terms of Use</Link>
           </div>
         </div>
       </div>

@@ -10,10 +10,12 @@ type PageConfig = {
 
 const pages: PageConfig[] = [
   { path: '', priority: 1.0, changeFrequency: 'weekly' },
-  { path: '/about', priority: 0.8, changeFrequency: 'monthly' },
-  { path: '/contact', priority: 0.7, changeFrequency: 'monthly' },
-  { path: '/privacy-policy', priority: 0.4, changeFrequency: 'yearly' },
-  { path: '/terms-of-use', priority: 0.4, changeFrequency: 'yearly' },
+  { path: '/services', priority: 0.9, changeFrequency: 'monthly' },
+  { path: '/loan-application', priority: 0.9, changeFrequency: 'monthly' },
+  { path: '/contact', priority: 0.8, changeFrequency: 'monthly' },
+  { path: '/faq', priority: 0.8, changeFrequency: 'monthly' },
+  { path: '/privacy', priority: 0.5, changeFrequency: 'yearly' },
+  { path: '/terms', priority: 0.5, changeFrequency: 'yearly' },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

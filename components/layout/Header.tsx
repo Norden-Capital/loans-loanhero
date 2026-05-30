@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Menu, X, ArrowRight, Home, Globe } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -78,14 +79,14 @@ const Header = () => {
         <div className="container mx-auto px-4 md:px-6">
           <nav className="grid grid-cols-2 md:grid-cols-3 items-center py-2.5">
             {/* Logo - Left column */}
-            <Link suppressHydrationWarning href="/" className="flex items-center transition-transform hover:scale-105 justify-self-start">
-              <img src="/logo-loanhero.svg" alt="LoanHero - Fast Personal Loans Canada" className="h-9 w-auto" />
+            <Link href="/" className="flex items-center transition-transform hover:scale-105 justify-self-start">
+              <Image src="/logo-loanhero.svg" alt="LoanHero - Fast Personal Loans Canada" width={160} height={36} className="h-9 w-auto" priority />
             </Link>
 
             {/* Desktop Navigation - Center column */}
             <div className="hidden md:flex items-center justify-center gap-8">
               {navLinks.map((link) => (
-                <Link suppressHydrationWarning 
+                <Link 
                   key={link.name}
                   href={link.href} 
                   className={cn(
@@ -134,7 +135,7 @@ const Header = () => {
               </div>
               */}
 
-              <Link suppressHydrationWarning 
+              <Link 
                 href="/loan-application" 
                 className="hidden md:block text-white px-5 py-2 rounded-xl font-bold text-sm shadow-lg shadow-indigo-500/20 transition-all hover:scale-105 hover:shadow-indigo-500/40 ring-4 ring-indigo-500/10 hover:ring-indigo-500/20"
                 style={{ background: 'var(--gradient-primary)' }}
@@ -181,7 +182,7 @@ const Header = () => {
         {/* Sidebar Links */}
         <div className="flex-1 overflow-y-auto py-4 px-6 space-y-2">
           {sidebarLinks.map((link, i) => (
-            <Link suppressHydrationWarning               key={link.name}
+            <Link key={link.name}
               href={link.href}
               className={cn(
                 "group flex items-center justify-between p-4 transition-all duration-300 border-b border-slate-50 last:border-0",
@@ -209,7 +210,7 @@ const Header = () => {
 
         {/* Sidebar Footer */}
         <div className="p-8 bg-white flex flex-col items-center">
-          <Link suppressHydrationWarning             href="/loan-application"
+          <Link href="/loan-application"
             className="inline-flex items-center justify-center gap-3 text-white px-8 py-3 rounded-xl font-bold text-base shadow-lg shadow-indigo-500/10 ring-4 ring-indigo-500/10 mb-6 w-full"
             style={{ background: 'var(--gradient-primary)' }}
             onClick={() => setIsMobileMenuOpen(false)}

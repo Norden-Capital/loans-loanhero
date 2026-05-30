@@ -211,7 +211,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col" suppressHydrationWarning={true}>
         {/* Google Analytics */}
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-TMC6EQ6D7R"
+          src="https://www.googletagmanager.com/gtag/js?id=G-KHJS6V2GPE"
           strategy="afterInteractive"
         />
         <Script id="google-analytics" strategy="afterInteractive">
@@ -219,11 +219,8 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-TMC6EQ6D7R', {
-              anonymize_ip: true,
-              allow_google_signals: false,
-              allow_ad_personalization_signals: false
-            });
+
+            gtag('config', 'G-KHJS6V2GPE');
           `}
         </Script>
 
