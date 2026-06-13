@@ -30,7 +30,7 @@ const Footer = () => {
           <div className="flex flex-col items-center md:items-start gap-6">
             <Link href="/" className="transition-transform hover:scale-105">
               <Image 
-                src="/logo-loanhero.svg" 
+                src="/favicon.svg" 
                 alt="LoanHero - Fast Personal Loans Canada" 
                 width={160}
                 height={56}

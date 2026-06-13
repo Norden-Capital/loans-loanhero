@@ -80,7 +80,7 @@ const Header = () => {
           <nav className="grid grid-cols-2 md:grid-cols-3 items-center py-2.5">
             {/* Logo - Left column */}
             <Link href="/" className="flex items-center transition-transform hover:scale-105 justify-self-start">
-              <Image src="/logo-loanhero.svg" alt="LoanHero - Fast Personal Loans Canada" width={160} height={36} className="h-9 w-auto" priority />
+              <Image src="/favicon.svg" alt="LoanHero - Fast Personal Loans Canada" width={160} height={36} className="h-9 w-auto" priority />
             </Link>
 
             {/* Desktop Navigation - Center column */}

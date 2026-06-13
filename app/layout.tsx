@@ -51,10 +51,6 @@ export const metadata: Metadata = {
     description: "Get instant personal loans with competitive rates and fast approval. Simple online application, secure process, and trusted lending solutions.",
     images: ["https://loanhero.ca/og-image.jpg"],
   },
-  icons: {
-    icon: "/logo-loanhero.svg",
-    apple: "/logo-loanhero.svg",
-  },
   manifest: "/site.webmanifest",
   themeColor: "#588157",
   other: {
@@ -79,7 +75,7 @@ export default function RootLayout({
     "name": "LoanHero",
     "alternateName": "Loan Hero",
     "url": "https://loanhero.ca",
-    "logo": "https://loanhero.ca/logo-loanhero.svg",
+    "logo": "https://loanhero.ca/favicon.svg",
     "image": "https://loanhero.ca/og-image.jpg",
     "description": "Quick and easy personal loans in Canada with competitive rates, fast approval, and secure online application process.",
     "email": "info@loanhero.ca",
@@ -144,7 +140,7 @@ export default function RootLayout({
     "@type": "Organization",
     "name": "LoanHero",
     "url": "https://loanhero.ca",
-    "logo": "https://loanhero.ca/logo-loanhero.svg",
+    "logo": "https://loanhero.ca/favicon.svg",
     "foundingDate": "2020",
     "slogan": "Quick & Easy Personal Loans",
     "description": "Leading Canadian online lending platform providing quick personal loans with competitive rates and fast approval.",
