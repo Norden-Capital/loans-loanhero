@@ -65,7 +65,7 @@ const CookieBanner = () => {
             We use cookies to improve your experience and deliver personalized services. 
             By continuing to use this site, you agree to our use of cookies.{" "}
             <Link
-              href="/privacy"
+              href="/privacy-policy"
               className="text-[var(--primary)] hover:text-indigo-400 font-bold transition-colors hover:underline whitespace-nowrap"
             >
               Learn More

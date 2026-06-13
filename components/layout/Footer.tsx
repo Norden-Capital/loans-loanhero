@@ -113,8 +113,8 @@ const Footer = () => {
         <div className="mt-16 pt-8 border-t border-white/5 flex flex-col items-center justify-between gap-6 text-[12px] text-slate-400 md:flex-row">
           <p>© {currentYear} LoanHero Canada. All rights reserved.</p>
           <div className="flex gap-8 font-medium uppercase tracking-widest text-[11px]">
-            <Link href="/privacy" className="transition-colors hover:text-white">Privacy Policy</Link>
-            <Link href="/terms" className="transition-colors hover:text-white">Terms of Use</Link>
+            <Link href="/privacy-policy" className="transition-colors hover:text-white">Privacy Policy</Link>
+            <Link href="/terms-of-use" className="transition-colors hover:text-white">Terms of Use</Link>
           </div>
         </div>
       </div>

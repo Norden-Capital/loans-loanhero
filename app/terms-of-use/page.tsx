@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'Terms of Service | LoanHero',
   description: 'Read the Terms of Service for LoanHero. Understand our policies, user agreements, and service guidelines for personal loans in Canada.',
   alternates: {
-    canonical: 'https://loanhero.ca/terms',
+    canonical: 'https://loanhero.ca/terms-of-use',
   },
 };
 
@@ -18,7 +18,7 @@ export default function TermsPage() {
     "@type": "BreadcrumbList",
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://loanhero.ca" },
-      { "@type": "ListItem", "position": 2, "name": "Terms of Service", "item": "https://loanhero.ca/terms" }
+      { "@type": "ListItem", "position": 2, "name": "Terms of Service", "item": "https://loanhero.ca/terms-of-use" }
     ]
   };
 

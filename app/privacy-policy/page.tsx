@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'Privacy Policy | LoanHero',
   description: 'Learn how LoanHero protects your privacy and secures your personal information during the loan application process.',
   alternates: {
-    canonical: 'https://loanhero.ca/privacy',
+    canonical: 'https://loanhero.ca/privacy-policy',
   },
 };
 
@@ -18,7 +18,7 @@ export default function PrivacyPage() {
     "@type": "BreadcrumbList",
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://loanhero.ca" },
-      { "@type": "ListItem", "position": 2, "name": "Privacy Policy", "item": "https://loanhero.ca/privacy" }
+      { "@type": "ListItem", "position": 2, "name": "Privacy Policy", "item": "https://loanhero.ca/privacy-policy" }
     ]
   };
 
