@@ -71,7 +71,6 @@ const pages: PageConfig[] = [
   { path: '/resources/faq', priority: 0.6, changeFrequency: 'monthly' },
 
   { path: '/contact', priority: 0.8, changeFrequency: 'monthly' },
-  { path: '/faq', priority: 0.8, changeFrequency: 'monthly' },
   { path: '/privacy-policy', priority: 0.5, changeFrequency: 'yearly' },
   { path: '/terms-of-use', priority: 0.5, changeFrequency: 'yearly' },
 ];

@@ -89,7 +89,6 @@ const Header = () => {
         { name: 'FAQ', href: '/resources/faq', icon: HelpCircle },
       ],
     },
-    { name: 'FAQ', href: '/faq' },
     { name: 'Contact', href: '/contact' },
   ];
 
