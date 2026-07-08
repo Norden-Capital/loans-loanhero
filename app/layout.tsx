@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     description: "Get instant personal loans with competitive rates and fast approval. Simple online application, secure process, and trusted lending solutions.",
     images: ["https://loanhero.ca/og-image.jpg"],
   },
-  manifest: "/site.webmanifest",
+  manifest: "/manifest.webmanifest",
   themeColor: "#588157",
   other: {
     "revisit-after": "7 days",

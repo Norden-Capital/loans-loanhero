@@ -4,7 +4,12 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { Menu, X, ArrowRight, Home, Globe } from 'lucide-react';
+import {
+  Menu, X, ArrowRight, ChevronDown,
+  DollarSign, Target, CreditCard, FileText, MapPin,
+  Calculator, Scale, BookOpen, HelpCircle,
+  type LucideIcon,
+} from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 // Inline SVG Components for Social Icons
@@ -55,18 +60,41 @@ const Header = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, [isMobileMenuOpen]);
 
-  const navLinks = [
+  const [openMenu, setOpenMenu] = useState<string | null>(null);
+  const [expandedMobile, setExpandedMobile] = useState<string | null>(null);
+
+  type NavChild = { name: string; href: string; icon: LucideIcon };
+  type NavLink = { name: string; href: string; children?: NavChild[] };
+
+  const navLinks: NavLink[] = [
     { name: 'Services', href: '/services' },
+    {
+      name: 'Loans',
+      href: '/loans',
+      children: [
+        { name: 'By Amount', href: '/loans/by-amount', icon: DollarSign },
+        { name: 'By Purpose', href: '/loans/by-purpose', icon: Target },
+        { name: 'By Credit Score', href: '/loans/by-credit-score', icon: CreditCard },
+        { name: 'By Type', href: '/loans/by-type', icon: FileText },
+        { name: 'By Location', href: '/loans/by-location', icon: MapPin },
+      ],
+    },
+    {
+      name: 'Resources',
+      href: '/resources',
+      children: [
+        { name: 'Tools', href: '/resources/tools', icon: Calculator },
+        { name: 'Comparisons', href: '/resources/comparisons', icon: Scale },
+        { name: 'Guides', href: '/resources/guides', icon: BookOpen },
+        { name: 'FAQ', href: '/resources/faq', icon: HelpCircle },
+      ],
+    },
     { name: 'FAQ', href: '/faq' },
     { name: 'Contact', href: '/contact' },
   ];
 
-  const sidebarLinks = [
-    { name: 'Home', href: '/', icon: Home },
-    ...navLinks
-  ];
-
   const isActive = (href: string) => pathname === href;
+  const isSectionActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
   return (
     <>
@@ -85,22 +113,90 @@ const Header = () => {
 
             {/* Desktop Navigation - Center column */}
             <div className="hidden md:flex items-center justify-center gap-8">
-              {navLinks.map((link) => (
-                <Link 
-                  key={link.name}
-                  href={link.href} 
-                  className={cn(
-                    "text-sm font-semibold transition-colors relative group",
-                    isActive(link.href) ? "text-[var(--primary)]" : "text-slate-900 hover:text-[var(--primary)]"
-                  )}
-                >
-                  {link.name}
-                  <span className={cn(
-                    "absolute -bottom-1 left-0 h-0.5 bg-[var(--primary)] transition-all",
-                    isActive(link.href) ? "w-full" : "w-0 group-hover:w-full"
-                  )}></span>
-                </Link>
-              ))}
+              {navLinks.map((link) =>
+                link.children ? (
+                  <div
+                    key={link.name}
+                    className="relative"
+                    onMouseEnter={() => setOpenMenu(link.name)}
+                    onMouseLeave={() => setOpenMenu(null)}
+                  >
+                    <Link
+                      href={link.href}
+                      className={cn(
+                        "flex items-center gap-1 text-sm font-semibold transition-colors relative group",
+                        isSectionActive(link.href) ? "text-[var(--primary)]" : "text-slate-900 hover:text-[var(--primary)]"
+                      )}
+                    >
+                      {link.name}
+                      <ChevronDown className={cn(
+                        "w-3.5 h-3.5 transition-transform duration-200",
+                        openMenu === link.name ? "rotate-180" : ""
+                      )} />
+                      <span className={cn(
+                        "absolute -bottom-1 left-0 h-0.5 bg-[var(--primary)] transition-all",
+                        isSectionActive(link.href) ? "w-full" : "w-0 group-hover:w-full"
+                      )}></span>
+                    </Link>
+
+                    {/* Dropdown */}
+                    <div className={cn(
+                      "absolute left-1/2 -translate-x-1/2 top-full pt-4 w-60 transition-all duration-200",
+                      openMenu === link.name
+                        ? "opacity-100 visible translate-y-0"
+                        : "opacity-0 invisible -translate-y-1 pointer-events-none"
+                    )}>
+                      <div className="bg-white rounded-2xl shadow-2xl shadow-slate-900/10 border border-slate-100 p-2">
+                        <Link
+                          href={link.href}
+                          className="flex items-center justify-between px-4 py-2.5 rounded-xl text-sm font-bold text-[var(--primary)] hover:bg-slate-50 transition-colors"
+                        >
+                          All {link.name}
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </Link>
+                        <div className="my-1 h-px bg-slate-100" />
+                        {link.children.map((child) => (
+                          <Link
+                            key={child.name}
+                            href={child.href}
+                            className={cn(
+                              "group/item flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors",
+                              isActive(child.href)
+                                ? "text-[var(--primary)] bg-slate-50"
+                                : "text-slate-600 hover:text-[var(--primary)] hover:bg-slate-50"
+                            )}
+                          >
+                            <span className={cn(
+                              "flex items-center justify-center w-8 h-8 rounded-lg shrink-0 transition-colors",
+                              isActive(child.href)
+                                ? "bg-[var(--primary)] text-white"
+                                : "bg-slate-100 text-slate-500 group-hover/item:bg-[var(--primary)] group-hover/item:text-white"
+                            )}>
+                              <child.icon className="w-4 h-4" />
+                            </span>
+                            {child.name}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    className={cn(
+                      "text-sm font-semibold transition-colors relative group",
+                      isActive(link.href) ? "text-[var(--primary)]" : "text-slate-900 hover:text-[var(--primary)]"
+                    )}
+                  >
+                    {link.name}
+                    <span className={cn(
+                      "absolute -bottom-1 left-0 h-0.5 bg-[var(--primary)] transition-all",
+                      isActive(link.href) ? "w-full" : "w-0 group-hover:w-full"
+                    )}></span>
+                  </Link>
+                )
+              )}
             </div>
 
             {/* CTA - Right column */}
@@ -182,32 +278,91 @@ const Header = () => {
         </div>
 
         {/* Sidebar Links */}
-        <div className="flex-1 overflow-y-auto py-4 px-6 space-y-2">
-          {sidebarLinks.map((link, i) => (
-            <Link key={link.name}
-              href={link.href}
-              className={cn(
-                "group flex items-center justify-between p-4 transition-all duration-300 border-b border-slate-50 last:border-0",
-                isActive(link.href) 
-                  ? "text-[var(--primary)]" 
-                  : "text-slate-900 hover:text-[var(--primary)]"
-              )}
-              onClick={() => setIsMobileMenuOpen(false)}
-              style={{ transitionDelay: `${i * 50}ms` }}
-            >
-              <div className="relative">
-                <span className="text-lg font-medium tracking-tight">{link.name}</span>
-                <span className={cn(
-                  "absolute -bottom-1 left-0 h-0.5 bg-[var(--primary)] transition-all",
-                  isActive(link.href) ? "w-full" : "w-0"
-                )}></span>
+        <div className="flex-1 overflow-y-auto py-4 px-6 space-y-1">
+          {/* Home */}
+          <Link
+            href="/"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className={cn(
+              "group flex items-center justify-between p-4 transition-colors border-b border-slate-50",
+              isActive('/') ? "text-[var(--primary)]" : "text-slate-900 hover:text-[var(--primary)]"
+            )}
+          >
+            <span className="text-lg font-medium tracking-tight">Home</span>
+            <ArrowRight className="w-5 h-5 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+          </Link>
+
+          {navLinks.map((link) =>
+            link.children ? (
+              <div key={link.name} className="border-b border-slate-50">
+                <div className="flex items-center justify-between">
+                  <Link
+                    href={link.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={cn(
+                      "flex-1 py-4 text-lg font-medium tracking-tight transition-colors",
+                      isSectionActive(link.href) ? "text-[var(--primary)]" : "text-slate-900 hover:text-[var(--primary)]"
+                    )}
+                  >
+                    {link.name}
+                  </Link>
+                  <button
+                    aria-label={`Toggle ${link.name} menu`}
+                    aria-expanded={expandedMobile === link.name}
+                    onClick={() => setExpandedMobile(expandedMobile === link.name ? null : link.name)}
+                    className="p-2 text-slate-400 transition-transform active:scale-90"
+                  >
+                    <ChevronDown className={cn(
+                      "w-5 h-5 transition-transform duration-200",
+                      expandedMobile === link.name ? "rotate-180 text-[var(--primary)]" : ""
+                    )} />
+                  </button>
+                </div>
+                <div className={cn(
+                  "overflow-hidden transition-all duration-300",
+                  expandedMobile === link.name ? "max-h-96 pb-3" : "max-h-0"
+                )}>
+                  <div className="flex flex-col gap-0.5 pl-2 border-l-2 border-slate-100 ml-1">
+                    {link.children.map((child) => (
+                      <Link
+                        key={child.name}
+                        href={child.href}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className={cn(
+                          "flex items-center gap-3 pl-4 pr-2 py-2.5 text-sm font-medium rounded-lg transition-colors",
+                          isActive(child.href) ? "text-[var(--primary)]" : "text-slate-500 hover:text-[var(--primary)]"
+                        )}
+                      >
+                        <span className={cn(
+                          "flex items-center justify-center w-7 h-7 rounded-lg shrink-0",
+                          isActive(child.href) ? "bg-[var(--primary)] text-white" : "bg-slate-100 text-slate-500"
+                        )}>
+                          <child.icon className="w-3.5 h-3.5" />
+                        </span>
+                        {child.name}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
               </div>
-              <ArrowRight className={cn(
-                "w-5 h-5 transition-all",
-                isActive(link.href) ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0"
-              )} />
-            </Link>
-          ))}
+            ) : (
+              <Link
+                key={link.name}
+                href={link.href}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={cn(
+                  "group flex items-center justify-between p-4 transition-colors border-b border-slate-50",
+                  isActive(link.href) ? "text-[var(--primary)]" : "text-slate-900 hover:text-[var(--primary)]"
+                )}
+              >
+                <span className="text-lg font-medium tracking-tight">{link.name}</span>
+                <ArrowRight className={cn(
+                  "w-5 h-5 transition-all",
+                  isActive(link.href) ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0"
+                )} />
+              </Link>
+            )
+          )}
         </div>
 
         {/* Sidebar Footer */}
