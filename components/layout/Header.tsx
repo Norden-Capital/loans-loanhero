@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
 import {
   Menu, X, ArrowRight, ChevronDown,
   DollarSign, Target, CreditCard, FileText, MapPin,
-  Calculator, Scale, BookOpen, HelpCircle,
+  Calculator, Scale, BookOpen, HelpCircle, Newspaper, Rss,
   type LucideIcon,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -87,6 +87,8 @@ const Header = () => {
         { name: 'Comparisons', href: '/resources/comparisons', icon: Scale },
         { name: 'Guides', href: '/resources/guides', icon: BookOpen },
         { name: 'FAQ', href: '/resources/faq', icon: HelpCircle },
+        { name: 'Blog', href: '/blog', icon: Newspaper },
+        { name: 'News', href: '/news', icon: Rss },
       ],
     },
     { name: 'Contact', href: '/contact' },

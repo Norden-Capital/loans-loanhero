@@ -6,6 +6,8 @@ import { loanPurposes } from '@/lib/loan-purposes';
 import { loanTypes } from '@/lib/loan-types';
 import { creditScoreRanges } from '@/lib/credit-scores';
 import { canadaLocations } from '@/lib/canada-locations';
+import { getAllPosts } from '@/lib/blog';
+import { getAllNews } from '@/lib/news';
 
 const host = 'https://loanhero.ca';
 
@@ -70,16 +72,36 @@ const pages: PageConfig[] = [
   })),
   { path: '/resources/faq', priority: 0.6, changeFrequency: 'monthly' },
 
+  // Content hubs
+  { path: '/blog', priority: 0.8, changeFrequency: 'weekly' },
+  { path: '/news', priority: 0.8, changeFrequency: 'weekly' },
+
   { path: '/contact', priority: 0.8, changeFrequency: 'monthly' },
   { path: '/privacy-policy', priority: 0.5, changeFrequency: 'yearly' },
   { path: '/terms-of-use', priority: 0.5, changeFrequency: 'yearly' },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return pages.map((page) => ({
+  const staticEntries: MetadataRoute.Sitemap = pages.map((page) => ({
     url: `${host}${page.path}`,
     lastModified: new Date(),
     changeFrequency: page.changeFrequency,
     priority: page.priority,
   }));
+
+  const blogEntries: MetadataRoute.Sitemap = getAllPosts().map((post) => ({
+    url: `${host}/blog/${post.slug}`,
+    lastModified: new Date(`${post.updated}T00:00:00Z`),
+    changeFrequency: 'weekly',
+    priority: 0.7,
+  }));
+
+  const newsEntries: MetadataRoute.Sitemap = getAllNews().map((item) => ({
+    url: `${host}/news/${item.slug}`,
+    lastModified: new Date(`${item.updated}T00:00:00Z`),
+    changeFrequency: 'weekly',
+    priority: 0.7,
+  }));
+
+  return [...staticEntries, ...blogEntries, ...newsEntries];
 }
