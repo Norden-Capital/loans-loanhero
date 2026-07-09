@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
+import { PostImage } from "@/components/blog/post-image";
 import rehypeRaw from "rehype-raw";
 import { ArrowUpRight } from "lucide-react";
 import CtaSection from "@/components/home/CtaSection";
@@ -103,7 +104,7 @@ export default async function NewsArticlePage({ params }: { params: Params }) {
   const sources = meta.related.filter((l) => l.href.startsWith("http"));
 
   return (
-    <div className="relative overflow-hidden bg-white">
+    <div className="relative overflow-x-clip bg-white">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
@@ -156,7 +157,7 @@ export default async function NewsArticlePage({ params }: { params: Params }) {
           <article className="min-w-0 w-full max-w-3xl mx-auto lg:mx-0">
             <TableOfContents items={toc} variant="mobile" />
             <div className="blog-prose prose prose-lg max-w-none">
-              <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw, rehypeSlug]}>
+              <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw, rehypeSlug]} components={{ img: PostImage }}>
                 {content}
               </ReactMarkdown>
             </div>
