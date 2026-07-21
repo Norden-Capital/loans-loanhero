@@ -21,11 +21,18 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://loanhero.ca"),
   title: "LoanHero - Quick & Easy Personal Loans Canada | Fast Approval & Competitive Rates",
   description: "LoanHero: Get instant personal loans in Canada with competitive rates and fast approval. Simple online application, secure process, and trusted lending solutions for all your financial needs.",
   keywords: ["loanhero", "personal loans Canada", "quick loans", "fast approval", "competitive rates", "online loan application", "instant loans", "Canadian lending", "financial solutions", "secure loans"],
   authors: [{ name: "LoanHero" }],
-  robots: "index, follow",
+  robots: {
+    index: true,
+    follow: true,
+    "max-image-preview": "large",
+    "max-snippet": -1,
+    "max-video-preview": -1,
+  },
   alternates: {
     canonical: "https://loanhero.ca/",
   },
@@ -34,14 +41,6 @@ export const metadata: Metadata = {
     url: "https://loanhero.ca/",
     title: "LoanHero - Quick & Easy Personal Loans Canada",
     description: "Get instant personal loans with competitive rates and fast approval. Simple online application, secure process, and trusted lending solutions.",
-    images: [
-      {
-        url: "https://loanhero.ca/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "LoanHero - Quick & Easy Personal Loans Canada",
-      },
-    ],
     locale: "en_CA",
     siteName: "LoanHero",
   },
@@ -49,7 +48,6 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "LoanHero - Quick & Easy Personal Loans Canada",
     description: "Get instant personal loans with competitive rates and fast approval. Simple online application, secure process, and trusted lending solutions.",
-    images: ["https://loanhero.ca/og-image.jpg"],
   },
   manifest: "/manifest.webmanifest",
   themeColor: "#588157",
@@ -76,7 +74,7 @@ export default function RootLayout({
     "alternateName": "Loan Hero",
     "url": "https://loanhero.ca",
     "logo": "https://loanhero.ca/favicon.svg",
-    "image": "https://loanhero.ca/og-image.jpg",
+    "image": "https://loanhero.ca/opengraph-image",
     "description": "Quick and easy personal loans in Canada with competitive rates, fast approval, and secure online application process.",
     "email": "info@loanhero.ca",
     "telephone": "+1-800-ASK-LOAN",
