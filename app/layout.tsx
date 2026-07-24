@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://loanhero.ca/",
   },
-  openGraph: {
+  openGraph: { images: [{ url: "/opengraph-image.png", width: 1200, height: 630 }],
     type: "website",
     url: "https://loanhero.ca/",
     title: "LoanHero - Quick & Easy Personal Loans Canada",
