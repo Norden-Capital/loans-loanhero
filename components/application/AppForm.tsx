@@ -39,12 +39,12 @@ const AppForm = () => {
         }
       },
       defaultValues: {
-        requestedAmount: Number(amount) || 750,
+        requestedAmount: Number(amount) || 1200,
         firstName: firstname || '',
         email: email || ''
       },
       extra: {
-        affiliate_sub1: affiliate_sub1 || '',
+        affiliate_sub1: affiliate_sub1 || 'loanhero',
         affiliate_sub2: affiliate_sub2 || '',
         affiliate_sub5: affiliate_sub5 || null,
         aff_utm_source: source || ''
