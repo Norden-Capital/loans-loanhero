@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import Script from 'next/script';
 import ContactHero from '@/components/contact/ContactHero';
 import ContactInfo from '@/components/contact/ContactInfo';

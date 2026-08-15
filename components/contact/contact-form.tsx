@@ -1,10 +1,10 @@
-﻿"use client";
+"use client";
 
 /* Contact form.
 
    Structure, field set and submission logic are UNIFIED across the network:
    same fields, same lib/contact.ts helper, same states. Only the STYLES block
-   below and the button markup are site-specific â€” this site keeps its own
+   below and the button markup are site-specific — this site keeps its own
    look on purpose, so the sites don't share a visual fingerprint.
 
    Site-specific email config lives in app/api/contact/route.ts.            */
@@ -27,7 +27,7 @@ const TOPICS = [
   "Something else",
 ];
 
-/* â”€â”€ Site styling â€” the only part that differs between sites â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── Site styling — the only part that differs between sites ───────────── */
 const STYLES = {
   card: "bg-white p-6 md:p-8 rounded-2xl shadow-xl shadow-slate-200/20 border border-slate-100",
   panel:
@@ -39,7 +39,7 @@ const STYLES = {
     "w-full text-white py-3 rounded-xl font-bold text-sm shadow-lg shadow-indigo-500/10 transition-all hover:scale-[1.01] hover:shadow-indigo-500/20 disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2 ring-2 ring-indigo-500/5 hover:ring-indigo-500/10",
   buttonStyle: { background: "var(--gradient-primary)" } as React.CSSProperties,
 };
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─────────────────────────────────────────────────────────────────────── */
 
 export function ContactForm() {
   const [status, setStatus] = useState<ContactStatus>("idle");
@@ -74,7 +74,7 @@ export function ContactForm() {
           Message sent
         </h2>
         <p className="text-sm text-slate-500 max-w-xs leading-relaxed">
-          Thanks for reaching out â€” we&apos;ll get back to you within one business day.
+          Thanks for reaching out — we&apos;ll get back to you within one business day.
         </p>
         <button
           type="button"
@@ -192,7 +192,7 @@ export function ContactForm() {
           />
         </div>
 
-        {/* Honeypot â€” hidden from people, frequently auto-filled by bots. */}
+        {/* Honeypot — hidden from people, frequently auto-filled by bots. */}
         <input
           type="text"
           name="company"
