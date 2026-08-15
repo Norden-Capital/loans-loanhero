@@ -153,10 +153,26 @@ export function ContactForm() {
             />
           </div>
           <div className="space-y-1">
-            <Label htmlFor="subject" className={STYLES.label}>
-              Subject *
+            <Label htmlFor="phone" className={STYLES.label}>
+              Phone Number (optional)
             </Label>
-            <NativeSelect
+            <Input
+              id="phone"
+              name="phone"
+              type="tel"
+              autoComplete="tel"
+              placeholder="(555) 123-4567"
+              disabled={isSubmitting}
+              className={STYLES.field}
+            />
+          </div>
+        </div>
+
+        <div className="space-y-1">
+          <Label htmlFor="subject" className={STYLES.label}>
+            Subject *
+          </Label>
+          <NativeSelect
             id="subject"
             name="subject"
             value={subject}
@@ -174,7 +190,6 @@ export function ContactForm() {
               </option>
             ))}
           </NativeSelect>
-          </div>
         </div>
 
         <div className="space-y-1">
