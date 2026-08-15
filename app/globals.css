@@ -1,4 +1,4 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @plugin "@tailwindcss/typography";
@@ -172,7 +172,7 @@
   }
 }
 
-/* Blog / News article body — maps @tailwindcss/typography onto the LoanHero
+/* Blog / News article body â€” maps @tailwindcss/typography onto the LoanHero
    design tokens so it adapts to light/dark automatically. */
 .blog-prose {
   --tw-prose-body: var(--foreground);
@@ -233,7 +233,7 @@
 }
 /* Offset heading anchors so table-of-contents jumps clear the fixed navbar */
 .blog-prose :is(h2, h3, h4) { scroll-margin-top: 6rem; }
-html { scroll-behavior: smooth; }/* Blog/News tables — bordered, padded, zebra (desktop) + horizontal scroll (mobile) */
+html { scroll-behavior: smooth; }/* Blog/News tables â€” bordered, padded, zebra (desktop) + horizontal scroll (mobile) */
 .blog-prose table {
   width: 100%;
   border-collapse: collapse;
@@ -256,4 +256,11 @@ html { scroll-behavior: smooth; }/* Blog/News tables — bordered, padded, zebra
 }
 @media (max-width: 640px) {
   .blog-prose table { display: block; overflow-x: auto; }
+}
+
+/* Reserve the scrollbar gutter so any overlay that locks body scroll can't
+   make the scrollbar vanish and shift the page sideways. The contact form's
+   topic field uses a native <select> precisely so it never locks scroll. */
+html {
+  scrollbar-gutter: stable;
 }
