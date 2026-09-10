@@ -313,15 +313,6 @@ const ToolsClient = () => {
                   href="/loan-application"
                   target="_blank"
                   rel="sponsored noopener noreferrer"
-                  onClick={() => {
-                    if (typeof window !== 'undefined' && window.gtag) {
-                      window.gtag('event', 'loan_application_click', {
-                        event_category: 'engagement',
-                        event_label: 'Calculator CTA Button',
-                        event_source: 'tools_page',
-                      });
-                    }
-                  }}
                 >
                   Check Your Real Rate
                   <ArrowRight />

@@ -54,16 +54,6 @@ const toolLinks = [
 
 const provinceLinks = ["Alberta", "British Columbia", "Ontario", "Quebec"];
 
-const trackClick = (label: string, slug: string) => {
-  if (typeof window !== "undefined" && window.gtag) {
-    window.gtag("event", "loan_application_click", {
-      event_category: "engagement",
-      event_label: label,
-      event_source: `loan_type_${slug}`,
-    });
-  }
-};
-
 const LoanTypeArticleClient = ({
   entry,
   content,
@@ -153,7 +143,6 @@ const LoanTypeArticleClient = ({
                 href="/loan-application"
                 target="_blank"
                 rel="sponsored noopener noreferrer"
-                onClick={() => trackClick("Loan Type Page Top CTA", entry.slug)}
               >
                 Apply Now
                 <ArrowRight />
@@ -191,7 +180,6 @@ const LoanTypeArticleClient = ({
               maxTerm={60}
               estimateApr={21}
               disclaimer="Based on 21% APR (CAD) • Max 35% APR in Canada"
-              guideSlug={`type-${entry.slug}`}
             />
           </div>
         </div>

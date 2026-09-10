@@ -80,15 +80,6 @@ const ComparisonArticleClient = ({ entry }: { entry: ComparisonEntry }) => {
                 href="/loan-application"
                 target="_blank"
                 rel="sponsored noopener noreferrer"
-                onClick={() => {
-                  if (typeof window !== 'undefined' && window.gtag) {
-                    window.gtag('event', 'loan_application_click', {
-                      event_category: 'engagement',
-                      event_label: 'Comparison Article Top CTA',
-                      event_source: `comparison_${entry.slug}`,
-                    });
-                  }
-                }}
               >
                 Check {entry.optionA.name} Rates
                 <ArrowRight />

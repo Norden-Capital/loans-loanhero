@@ -14,16 +14,6 @@ import type { LoanPurposeMeta } from "@/lib/loan-purposes";
 import { getOtherLoanPurposes } from "@/lib/loan-purposes";
 import { loanAmounts } from "@/lib/loan-amounts";
 
-const trackClick = (label: string, slug: string) => {
-  if (typeof window !== "undefined" && window.gtag) {
-    window.gtag("event", "loan_application_click", {
-      event_category: "engagement",
-      event_label: label,
-      event_source: `purpose_${slug}`,
-    });
-  }
-};
-
 const PurposeArticleClient = ({
   entry,
   content,
@@ -130,7 +120,6 @@ const PurposeArticleClient = ({
                 href="/loan-application"
                 target="_blank"
                 rel="sponsored noopener noreferrer"
-                onClick={() => trackClick("Purpose Page Top CTA", entry.slug)}
               >
                 Apply Now
                 <ArrowRight />
@@ -159,7 +148,6 @@ const PurposeArticleClient = ({
               maxTerm={60}
               estimateApr={21}
               disclaimer="Based on 21% APR (CAD) • Max 35% APR in Canada"
-              guideSlug={`purpose-${entry.slug}`}
             />
           </div>
         </div>

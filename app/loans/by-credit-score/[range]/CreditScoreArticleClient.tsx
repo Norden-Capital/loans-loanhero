@@ -41,16 +41,6 @@ const comparisonLinks = [
 
 const cityLinks = ["Toronto, ON", "Montreal, QC", "Calgary, AB", "Ottawa, ON", "Edmonton, AB", "Vancouver, BC"];
 
-const trackClick = (label: string, slug: string) => {
-  if (typeof window !== "undefined" && window.gtag) {
-    window.gtag("event", "loan_application_click", {
-      event_category: "engagement",
-      event_label: label,
-      event_source: `credit_score_${slug}`,
-    });
-  }
-};
-
 const CreditScoreArticleClient = ({ entry }: { entry: CreditScoreRange }) => {
   const otherRanges = getOtherCreditScores(entry.slug);
   const popularAmounts = [...loanAmounts].sort((a, b) => a.amount - b.amount).slice(0, 6);
@@ -152,7 +142,6 @@ const CreditScoreArticleClient = ({ entry }: { entry: CreditScoreRange }) => {
                 href="/loan-application"
                 target="_blank"
                 rel="sponsored noopener noreferrer"
-                onClick={() => trackClick("Credit Score Page Top CTA", entry.slug)}
               >
                 Check Your Options
                 <ArrowRight />

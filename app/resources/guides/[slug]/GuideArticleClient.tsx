@@ -13,16 +13,6 @@ import type { GuideMeta, GuideContent } from "@/lib/guides";
 import { getRelatedGuides } from "@/lib/guides";
 import { guideIcons } from "@/lib/guide-icons";
 
-const trackClick = (label: string, slug: string) => {
-  if (typeof window !== "undefined" && window.gtag) {
-    window.gtag("event", "loan_application_click", {
-      event_category: "engagement",
-      event_label: label,
-      event_source: `guide_${slug}`,
-    });
-  }
-};
-
 const GuideArticleClient = ({
   entry,
   content,
@@ -107,7 +97,6 @@ const GuideArticleClient = ({
                 purposeLabel={entry.calculator.purposeLabel}
                 defaultAmount={entry.calculator.defaultAmount}
                 defaultTerm={entry.calculator.defaultTerm}
-                guideSlug={entry.slug}
               />
             </div>
           )}
@@ -136,7 +125,6 @@ const GuideArticleClient = ({
               href="/loan-application"
               target="_blank"
               rel="sponsored noopener noreferrer"
-              onClick={() => trackClick("Guide Article Ready to Apply", entry.slug)}
             >
               Check Your Rates Now
               <ArrowRight />

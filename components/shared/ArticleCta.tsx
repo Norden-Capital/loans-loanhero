@@ -52,15 +52,6 @@ const CTASection = () => {
               href="/loan-application"
               target="_blank"
               rel="sponsored noopener noreferrer"
-              onClick={() => {
-                if (typeof window !== 'undefined' && window.gtag) {
-                  window.gtag('event', 'loan_application_click', {
-                    event_category: 'engagement',
-                    event_label: 'Main CTA Button',
-                    event_source: 'cta_section'
-                  });
-                }
-              }}
               className="inline-block"
             >
               <button
