@@ -1,0 +1,33 @@
+---
+import BaseLayout from "@/src/layouts/BaseLayout.astro";
+import NewsListing from "@/components/pages/news/NewsListing";
+import { getAllNews, NEWS_DESCRIPTION, NEWS_SECTION } from "@/lib/news";
+import type { Metadata } from "@/lib/metadata";
+import { BASE_URL, buildMetadata } from "@/lib/seo";
+
+const base = buildMetadata({
+  title: NEWS_SECTION.label,
+  description: NEWS_DESCRIPTION,
+  path: NEWS_SECTION.path,
+  keywords: [
+    "canada loan news",
+    "interest rate news canada",
+    "consumer debt news canada",
+    "loanhero news",
+  ],
+});
+
+const metadata: Metadata = {
+  ...base,
+  alternates: {
+    ...base.alternates,
+    types: { "application/rss+xml": `${BASE_URL}${NEWS_SECTION.path}/feed.xml` },
+  },
+};
+
+const news = await getAllNews();
+---
+
+<BaseLayout metadata={metadata}>
+  <NewsListing news={news} />
+</BaseLayout>

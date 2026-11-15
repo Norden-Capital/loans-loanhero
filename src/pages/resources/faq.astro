@@ -1,0 +1,17 @@
+---
+import BaseLayout from "@/src/layouts/BaseLayout.astro";
+import FAQClient from "@/components/pages/resources/faq/FAQClient";
+import type { Metadata } from "@/lib/metadata";
+
+const metadata: Metadata = {
+  title: "FAQ | LoanHero Canada",
+  description: "Answers to common questions about applying for a personal loan with LoanHero.",
+  alternates: {
+    canonical: '/resources/faq',
+  },
+};
+---
+
+<BaseLayout metadata={metadata}>
+  <FAQClient client:load />
+</BaseLayout>

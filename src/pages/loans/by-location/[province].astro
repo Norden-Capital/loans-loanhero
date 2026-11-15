@@ -1,0 +1,54 @@
+---
+import BaseLayout from "@/src/layouts/BaseLayout.astro";
+import ProvinceLocationClient from "@/components/pages/loans/by-location/ProvinceLocationClient";
+import { canadaLocations, getProvinceBySlug } from "@/lib/canada-locations";
+import { buildArticleKeywords } from "@/lib/seo-keywords";
+import type { Metadata } from "@/lib/metadata";
+
+// Each page's text lives in lib/province-content/<slug>.ts
+export function getStaticPaths() {
+  const modules = import.meta.glob<{ default: any }>("../../../../lib/province-content/*.ts", { eager: true });
+  return canadaLocations
+    .filter((entry) => modules["../../../../lib/province-content/" + entry.slug + ".ts"])
+    .map((entry) => ({
+      params: { province: entry.slug },
+      props: { content: modules["../../../../lib/province-content/" + entry.slug + ".ts"].default },
+    }));
+}
+
+const { province } = Astro.params;
+const entry = getProvinceBySlug(province!)!;
+const { content } = Astro.props;
+
+const title = `Personal Loans in ${entry.name} | LoanHero`;
+const description = `Compare personal loans from $300 to $5,000 CAD in ${entry.name}. Learn the real provincial lending rules, interest rate caps, and how to apply safely today.`;
+const url = `https://loanhero.ca/loans/by-location/${entry.slug}`;
+const keywords = buildArticleKeywords(`${entry.name} personal loans`, [
+  `loans in ${entry.name.toLowerCase()}`,
+  `${entry.name.toLowerCase()} loan regulations`,
+]);
+
+const metadata: Metadata = {
+  title,
+  description,
+  keywords,
+  alternates: {
+    canonical: `/loans/by-location/${entry.slug}`,
+  },
+  openGraph: { images: [{ url: "/opengraph-image.png", width: 1200, height: 630 }],
+    type: "article",
+    url,
+    title,
+    description,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
+};
+---
+
+<BaseLayout metadata={metadata}>
+  <ProvinceLocationClient client:load province={entry} content={content} />
+</BaseLayout>

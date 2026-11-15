@@ -1,6 +1,6 @@
 'use client';
 
-import Link from "next/link";
+import Link from "@/lib/compat/link";
 import { MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { canadaLocations } from "@/lib/canada-locations";

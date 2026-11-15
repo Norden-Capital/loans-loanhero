@@ -7,7 +7,7 @@
    below and the button markup are site-specific — this site keeps its own
    look on purpose, so the sites don't share a visual fingerprint.
 
-   Site-specific email config lives in app/api/contact/route.ts.            */
+   Site-specific email config lives in src/pages/api/contact.ts.            */
 
 import React, { useState } from "react";
 import { Send, CheckCircle2, Loader2 } from "lucide-react";

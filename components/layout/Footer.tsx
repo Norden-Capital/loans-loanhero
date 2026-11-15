@@ -1,8 +1,8 @@
 "use client";
 
 import React from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
+import Link from '@/lib/compat/link';
+import Image from '@/lib/compat/image';
 import { Phone, Mail, Clock, MapPin, ArrowRight } from 'lucide-react';
 
 // Inline SVG Components for Social Icons

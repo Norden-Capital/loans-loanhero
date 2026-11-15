@@ -1,0 +1,13 @@
+---
+import ArticlePage from "@/src/components/ArticlePage.astro";
+import { BLOG_SECTION, getAllPosts, getPost } from "@/lib/blog";
+
+// One page per published post in content/blog; anything else is a 404.
+export async function getStaticPaths() {
+  return (await getAllPosts()).map((post) => ({ params: { slug: post.slug } }));
+}
+
+const post = (await getPost(Astro.params.slug!))!;
+---
+
+<ArticlePage post={post} section={BLOG_SECTION} kind="blog" />

@@ -1,5 +1,5 @@
 import type { ComponentProps } from "react";
-import Image from "next/image";
+import Image from "@/lib/compat/image";
 
 /**
  * Renders markdown images through next/image (optimized WebP, responsive srcset,

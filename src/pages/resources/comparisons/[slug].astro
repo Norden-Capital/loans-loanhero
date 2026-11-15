@@ -1,0 +1,46 @@
+---
+import BaseLayout from "@/src/layouts/BaseLayout.astro";
+import ComparisonArticleClient from "@/components/pages/resources/comparisons/ComparisonArticleClient";
+import { comparisons, getComparisonBySlug } from "@/lib/comparisons";
+import { buildArticleKeywords } from "@/lib/seo-keywords";
+import type { Metadata } from "@/lib/metadata";
+
+export function getStaticPaths() {
+  return comparisons.map((entry) => ({ params: { slug: entry.slug } }));
+}
+
+const { slug } = Astro.params;
+const entry = getComparisonBySlug(slug!)!;
+
+const title = `${entry.title} | LoanHero Canada`;
+const url = `https://loanhero.ca/resources/comparisons/${entry.slug}`;
+const keywords = buildArticleKeywords(entry.title, [
+  entry.optionA.name,
+  entry.optionB.name,
+  `${entry.optionA.name} vs ${entry.optionB.name}`,
+]);
+
+const metadata: Metadata = {
+  title,
+  description: entry.description,
+  keywords,
+  alternates: {
+    canonical: `/resources/comparisons/${entry.slug}`,
+  },
+  openGraph: { images: [{ url: "/opengraph-image.png", width: 1200, height: 630 }],
+    type: "article",
+    url,
+    title,
+    description: entry.description,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description: entry.description,
+  },
+};
+---
+
+<BaseLayout metadata={metadata}>
+  <ComparisonArticleClient client:load entry={entry} />
+</BaseLayout>

@@ -1,0 +1,46 @@
+---
+import BaseLayout from "@/src/layouts/BaseLayout.astro";
+import CreditScoreArticleClient from "@/components/pages/loans/by-credit-score/CreditScoreArticleClient";
+import { creditScoreRanges, getCreditScoreBySlug } from "@/lib/credit-scores";
+import { buildArticleKeywords } from "@/lib/seo-keywords";
+import type { Metadata } from "@/lib/metadata";
+
+export function getStaticPaths() {
+  return creditScoreRanges.map((entry) => ({ params: { range: entry.slug } }));
+}
+
+const { range } = Astro.params;
+const entry = getCreditScoreBySlug(range!)!;
+
+const title = `Credit Score ${entry.label} Loans Canada | LoanHero`;
+const description = `Explore personal loan options, interest rates, and terms for Canadians with ${entry.tier.toLowerCase()} credit scores (${entry.label}).`;
+const url = `https://loanhero.ca/loans/by-credit-score/${entry.slug}`;
+const keywords = buildArticleKeywords(`credit score ${entry.label} loan`, [
+  `loans for credit score ${entry.label}`,
+  `${entry.tier.toLowerCase()} credit loans canada`,
+]);
+
+const metadata: Metadata = {
+  title,
+  description,
+  keywords,
+  alternates: {
+    canonical: `/loans/by-credit-score/${entry.slug}`,
+  },
+  openGraph: { images: [{ url: "/opengraph-image.png", width: 1200, height: 630 }],
+    type: "article",
+    url,
+    title,
+    description,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
+};
+---
+
+<BaseLayout metadata={metadata}>
+  <CreditScoreArticleClient client:load entry={entry} />
+</BaseLayout>

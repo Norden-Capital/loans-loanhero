@@ -1,0 +1,17 @@
+---
+import BaseLayout from "@/src/layouts/BaseLayout.astro";
+import GuidesClient from "@/components/pages/resources/guides/GuidesClient";
+import type { Metadata } from "@/lib/metadata";
+
+const metadata: Metadata = {
+  title: "Canadian Loan Guides | LoanHero Canada",
+  description: "Comprehensive guides to help you navigate the personal loan process in Canada — loan types, credit, provincial regulations, and more.",
+  alternates: {
+    canonical: '/resources/guides',
+  },
+};
+---
+
+<BaseLayout metadata={metadata}>
+  <GuidesClient client:load />
+</BaseLayout>

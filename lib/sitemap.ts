@@ -1,4 +1,4 @@
-import { MetadataRoute } from 'next';
+import type { SitemapEntry } from '@/lib/metadata';
 import { comparisons } from '@/lib/comparisons';
 import { guides } from '@/lib/guides';
 import { loanAmounts } from '@/lib/loan-amounts';
@@ -27,6 +27,7 @@ const pageLastModified = {
   contact: '2026-08-15',
   privacyPolicy: '2026-06-13',
   termsOfUse: '2026-06-13',
+  unsubscribe: '2026-11-15',
   loansHub: '2026-07-08',
   byAmount: '2026-07-08',
   byPurpose: '2026-07-08',
@@ -59,7 +60,7 @@ function newestDate(days: string[]): Date | undefined {
   return toDate(days.reduce((latest, day) => (day > latest ? day : latest)));
 }
 
-function toEntries(pages: PageConfig[]): MetadataRoute.Sitemap {
+function toEntries(pages: PageConfig[]): SitemapEntry[] {
   return pages.map((page) => ({
     url: `${BASE_URL}${page.path}`,
     lastModified: toDate(pageLastModified[page.group]),
@@ -75,6 +76,7 @@ const sitePages: PageConfig[] = [
   { path: '/contact', group: 'contact', priority: 0.8, changeFrequency: 'monthly' },
   { path: '/privacy-policy', group: 'privacyPolicy', priority: 0.5, changeFrequency: 'yearly' },
   { path: '/terms-of-use', group: 'termsOfUse', priority: 0.5, changeFrequency: 'yearly' },
+  { path: '/unsubscribe', group: 'unsubscribe', priority: 0.3, changeFrequency: 'yearly' },
 ];
 
 // Loans hub + dynamic sub-pages
@@ -142,10 +144,10 @@ export function isSitemapSection(value: string): value is SitemapSection {
   return (sitemapSections as readonly string[]).includes(value);
 }
 
-export function getSitemapEntries(section: SitemapSection): MetadataRoute.Sitemap {
+export async function getSitemapEntries(section: SitemapSection): Promise<SitemapEntry[]> {
   if (section === 'blog') {
-    const posts = getAllPosts();
-    const blogPosts: MetadataRoute.Sitemap = posts.map((post) => ({
+    const posts = await getAllPosts();
+    const blogPosts: SitemapEntry[] = posts.map((post) => ({
       url: `${BASE_URL}/blog/${post.slug}`,
       lastModified: toDate(post.updated),
       changeFrequency: 'weekly',
@@ -164,8 +166,8 @@ export function getSitemapEntries(section: SitemapSection): MetadataRoute.Sitema
   }
 
   if (section === 'news') {
-    const news = getAllNews();
-    const newsPosts: MetadataRoute.Sitemap = news.map((item) => ({
+    const news = await getAllNews();
+    const newsPosts: SitemapEntry[] = news.map((item) => ({
       url: `${BASE_URL}/news/${item.slug}`,
       lastModified: toDate(item.updated),
       changeFrequency: 'weekly',
@@ -190,7 +192,7 @@ export function getSitemapEntries(section: SitemapSection): MetadataRoute.Sitema
 
 // Same markup Next.js generates for a built-in app/sitemap.ts, which can't be
 // used here because it would take over /sitemap.xml from the index.
-export function toUrlsetXml(entries: MetadataRoute.Sitemap): string {
+export function toUrlsetXml(entries: SitemapEntry[]): string {
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
   xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
 

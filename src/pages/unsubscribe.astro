@@ -1,0 +1,27 @@
+---
+import BaseLayout from "@/src/layouts/BaseLayout.astro";
+import UnsubscribeForm from "@/components/unsubscribe/UnsubscribeForm";
+import type { Metadata } from "@/lib/metadata";
+import "@/components/unsubscribe/unsubscribe.css";
+
+const metadata: Metadata = {
+  title: "Unsubscribe | LoanHero",
+  description: "Stop LoanHero emails. Enter your email address and we will stop sending you emails.",
+  alternates: {
+    canonical: "https://loanhero.ca/unsubscribe",
+  },
+};
+---
+
+<BaseLayout metadata={metadata}>
+  <section class="uh-hero">
+    <h1>Un<span class="uh-grad">subscribe</span></h1>
+    <p>Enter your email and we will stop sending you emails.</p>
+  </section>
+
+  <section class="uh-section">
+    <div class="uh-card">
+      <UnsubscribeForm client:load />
+    </div>
+  </section>
+</BaseLayout>

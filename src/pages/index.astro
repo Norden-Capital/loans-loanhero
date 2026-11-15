@@ -1,0 +1,21 @@
+---
+import BaseLayout from "@/src/layouts/BaseLayout.astro";
+import Hero from "@/components/home/Hero";
+import TrustBadges from "@/components/home/TrustBadges";
+import Lenders from "@/components/home/Lenders";
+import Features from "@/components/home/Features";
+import HowItWorks from "@/components/home/HowItWorks";
+import Testimonials from "@/components/home/Testimonials";
+import CtaSection from "@/components/home/CtaSection";
+import { homeOgImage } from "@/lib/site-metadata";
+---
+
+<BaseLayout metadata={{}} fileOgImage={homeOgImage}>
+  <Hero client:load />
+  <TrustBadges />
+  <Lenders client:load />
+  <Features />
+  <HowItWorks />
+  <Testimonials client:load />
+  <CtaSection />
+</BaseLayout>

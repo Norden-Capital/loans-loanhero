@@ -1,7 +1,7 @@
 /* Shared contact-form submitter.
 
    This file is IDENTICAL in every site in the network — do not customise it
-   per site. Anything site-specific belongs in app/api/contact/route.ts.
+   per site. Anything site-specific belongs in src/pages/api/contact.ts.
 
    It reads the <form> generically rather than expecting fixed fields, so each
    site can keep its own markup and field set. Whatever extra inputs a form

@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { usePathname } from 'next/navigation';
+import Link from '@/lib/compat/link';
+import Image from '@/lib/compat/image';
+import { usePathname } from '@/lib/compat/navigation';
 import {
   Menu, X, ArrowRight, ChevronDown,
   DollarSign, Target, CreditCard, FileText, MapPin,

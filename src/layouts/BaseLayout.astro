@@ -1,0 +1,79 @@
+---
+/**
+ * The site shell (was app/layout.tsx): <head> tags, header, footer, cookie
+ * banner, and the tracking/structured-data scripts that load after the page.
+ */
+import "@/src/styles/fonts.css";
+import "@/src/styles/globals.css";
+
+import TopBar from "@/components/layout/TopBar";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import CookieBanner from "@/components/layout/CookieBanner";
+import { setServerPathname } from "@/lib/compat/navigation";
+import { resolveHead, type FileOgImage, type Metadata } from "@/lib/metadata";
+import { iconLinks, siteJsonLd, siteMetadata } from "@/lib/site-metadata";
+
+import poppins300 from "@fontsource/poppins/files/poppins-latin-300-normal.woff2?url";
+import poppins400 from "@fontsource/poppins/files/poppins-latin-400-normal.woff2?url";
+import poppins500 from "@fontsource/poppins/files/poppins-latin-500-normal.woff2?url";
+import poppins600 from "@fontsource/poppins/files/poppins-latin-600-normal.woff2?url";
+import poppins700 from "@fontsource/poppins/files/poppins-latin-700-normal.woff2?url";
+import poppins800 from "@fontsource/poppins/files/poppins-latin-800-normal.woff2?url";
+import poppins900 from "@fontsource/poppins/files/poppins-latin-900-normal.woff2?url";
+import grotesk400 from "@fontsource/space-grotesk/files/space-grotesk-latin-400-normal.woff2?url";
+
+interface Props {
+  metadata: Metadata;
+  /** A file/generated social image for this page (home, blog and news posts). */
+  fileOgImage?: FileOgImage;
+  /** An extra robots tag before the page's own (the 404 page). */
+  extraRobots?: string;
+  /** Page structured data the old site added after load (next/script afterInteractive). */
+  deferredJsonLd?: { id: string; data: object }[];
+}
+
+const { metadata, fileOgImage, extraRobots, deferredJsonLd = [] } = Astro.props;
+
+// Components that read the current path (header, breadcrumbs) need it at build time.
+setServerPathname(Astro.url.pathname.replace(/\.html$/, "").replace(/\/index$/, "") || "/");
+
+const head = resolveHead(siteMetadata, metadata, { fileOgImage, extraRobots });
+
+const fontPreloads = [
+  poppins300, poppins400, poppins500, poppins600, poppins700, poppins800, poppins900, grotesk400,
+];
+
+// Same order and ids as the old next/script tags.
+const afterLoad = [...siteJsonLd, ...deferredJsonLd];
+const tracking = `(function(){
+var d=document,b=d.body;
+function add(attrs,text){var s=d.createElement("script");for(var k in attrs)s.setAttribute(k,attrs[k]);if(attrs.src)s.async=true;if(text)s.text=text;b.appendChild(s);}
+add({src:"https://www.googletagmanager.com/gtag/js?id=G-KHJS6V2GPE"});
+add({id:"google-analytics"},"\\n            window.dataLayer = window.dataLayer || [];\\n            function gtag(){dataLayer.push(arguments);}\\n            gtag('js', new Date());\\n\\n            gtag('config', 'G-KHJS6V2GPE');\\n          ");
+add({id:"microsoft-clarity"},"\\n            (function(c,l,a,r,i,t,y){\\n              c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};\\n              t=l.createElement(r);t.async=1;t.src=\\"https://www.clarity.ms/tag/\\"+i;\\n              y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);\\n            })(window, document, \\"clarity\\", \\"script\\", \\"y1rm1ali48\\");\\n          ");
+var ld=${JSON.stringify(afterLoad).replace(/</g, "\\u003c")};
+for(var i=0;i<ld.length;i++)add({id:ld[i].id,type:"application/ld+json"},JSON.stringify(ld[i].data));
+})();`;
+---
+
+<!doctype html>
+<html lang="en" class="font-vars h-full antialiased">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {fontPreloads.map((href) => <link rel="preload" href={href} as="font" crossorigin="" type="font/woff2" />)}
+    <link rel="preload" as="image" href="/favicon.svg" />
+    <title>{head.title}</title>
+    <Fragment set:html={head.tags} />
+    <Fragment set:html={iconLinks} />
+  </head>
+  <body class="min-h-full flex flex-col">
+    <TopBar client:load />
+    <Header client:load />
+    <main class="flex-1"><slot /></main>
+    <Footer client:load />
+    <CookieBanner client:load />
+    <script is:inline set:html={tracking} />
+  </body>
+</html>

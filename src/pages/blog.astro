@@ -1,0 +1,33 @@
+---
+import BaseLayout from "@/src/layouts/BaseLayout.astro";
+import BlogListing from "@/components/pages/blog/BlogListing";
+import { BLOG_DESCRIPTION, BLOG_SECTION, getAllPosts } from "@/lib/blog";
+import type { Metadata } from "@/lib/metadata";
+import { BASE_URL, buildMetadata } from "@/lib/seo";
+
+const base = buildMetadata({
+  title: BLOG_SECTION.label,
+  description: BLOG_DESCRIPTION,
+  path: BLOG_SECTION.path,
+  keywords: [
+    "personal loan blog canada",
+    "loan tips canada",
+    "borrowing advice canada",
+    "loanhero blog",
+  ],
+});
+
+const metadata: Metadata = {
+  ...base,
+  alternates: {
+    ...base.alternates,
+    types: { "application/rss+xml": `${BASE_URL}${BLOG_SECTION.path}/feed.xml` },
+  },
+};
+
+const posts = await getAllPosts();
+---
+
+<BaseLayout metadata={metadata}>
+  <BlogListing posts={posts} />
+</BaseLayout>

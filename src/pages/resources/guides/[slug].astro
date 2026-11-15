@@ -1,0 +1,50 @@
+---
+import BaseLayout from "@/src/layouts/BaseLayout.astro";
+import GuideArticleClient from "@/components/pages/resources/guides/GuideArticleClient";
+import { guides, getGuideBySlug } from "@/lib/guides";
+import { buildArticleKeywords } from "@/lib/seo-keywords";
+import type { Metadata } from "@/lib/metadata";
+
+// Each page's text lives in lib/guide-content/<slug>.ts
+export function getStaticPaths() {
+  const modules = import.meta.glob<{ default: any }>("../../../../lib/guide-content/*.ts", { eager: true });
+  return guides
+    .filter((entry) => modules["../../../../lib/guide-content/" + entry.slug + ".ts"])
+    .map((entry) => ({
+      params: { slug: entry.slug },
+      props: { content: modules["../../../../lib/guide-content/" + entry.slug + ".ts"].default },
+    }));
+}
+
+const { slug } = Astro.params;
+const entry = getGuideBySlug(slug!)!;
+const { content } = Astro.props;
+
+const title = `${entry.title} | LoanHero Canada`;
+const url = `https://loanhero.ca/resources/guides/${entry.slug}`;
+const keywords = buildArticleKeywords(entry.title, [entry.category]);
+
+const metadata: Metadata = {
+  title,
+  description: entry.description,
+  keywords,
+  alternates: {
+    canonical: `/resources/guides/${entry.slug}`,
+  },
+  openGraph: { images: [{ url: "/opengraph-image.png", width: 1200, height: 630 }],
+    type: "article",
+    url,
+    title,
+    description: entry.description,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description: entry.description,
+  },
+};
+---
+
+<BaseLayout metadata={metadata}>
+  <GuideArticleClient client:load entry={entry} content={content} />
+</BaseLayout>

@@ -1,0 +1,34 @@
+---
+import BaseLayout from "@/src/layouts/BaseLayout.astro";
+import AppHero from "@/components/application/AppHero";
+import AppForm from "@/components/application/AppForm";
+import type { Metadata } from "@/lib/metadata";
+
+const metadata: Metadata = {
+  title: 'Apply for a Personal Loan Online | LoanHero Canada',
+  description: 'Start your secure online loan application with LoanHero. Get instant approval decisions and same-day funding for personal and emergency loans.',
+  alternates: {
+    canonical: 'https://loanhero.ca/loan-application',
+  },
+};
+
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://loanhero.ca" },
+    { "@type": "ListItem", "position": 2, "name": "Loan Application", "item": "https://loanhero.ca/loan-application" }
+  ]
+};
+---
+
+<BaseLayout metadata={metadata} deferredJsonLd={[{ id: "application-breadcrumb", data: breadcrumbJsonLd }]}>
+  <main class="min-h-screen bg-slate-50">
+    <AppHero client:load />
+    {/* The form reads the URL (?id=, ?amount=, ?source=…), so it renders in the
+        browser only. The page HTML shows the same "Loading" text as before. */}
+    <AppForm client:only="react">
+      <div slot="fallback" class="p-8 text-center">Loading application...</div>
+    </AppForm>
+  </main>
+</BaseLayout>

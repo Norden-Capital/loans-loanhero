@@ -1,0 +1,61 @@
+---
+/**
+ * One blog post or news item (was app/blog/[slug]/page.tsx and
+ * app/news/[slug]/page.tsx). The article is plain HTML; only the two tables of
+ * contents are interactive islands.
+ */
+import BaseLayout from "@/src/layouts/BaseLayout.astro";
+import { Article } from "@/components/blog/article";
+import { TableOfContents } from "@/components/blog/table-of-contents";
+import type { ArticleSection, Post } from "@/lib/content";
+import type { Metadata } from "@/lib/metadata";
+import { buildMetadata, SITE_NAME } from "@/lib/seo";
+import { extractToc } from "@/lib/toc";
+
+interface Props {
+  post: Post;
+  section: ArticleSection;
+  /** "blog" or "news": used in the share image alt text, as before. */
+  kind: "blog" | "news";
+}
+
+const { post, section, kind } = Astro.props;
+const { slug } = post.meta;
+
+const base = buildMetadata({
+  title: post.meta.title,
+  description: post.meta.description,
+  path: `${section.path}/${slug}`,
+  keywords: post.meta.keywords.length > 0 ? post.meta.keywords : undefined,
+  // Share this post's own opengraph-image, not the site-wide default.
+  defaultImage: false,
+});
+
+const metadata: Metadata = {
+  ...base,
+  openGraph: {
+    ...base.openGraph,
+    type: "article",
+    publishedTime: post.meta.date,
+    modifiedTime: post.meta.updated,
+    authors: [post.meta.author],
+  },
+};
+
+const ogImage = {
+  url: `${section.path}/${slug}/opengraph-image`,
+  type: "image/png",
+  width: 1200,
+  height: 630,
+  alt: `${SITE_NAME} ${kind} article`,
+};
+
+const toc = extractToc(post.content);
+---
+
+<BaseLayout metadata={metadata} fileOgImage={ogImage}>
+  <Article post={post} section={section}>
+    <TableOfContents slot="tocMobile" client:load items={toc} variant="mobile" />
+    <TableOfContents slot="tocSidebar" client:load items={toc} variant="sidebar" />
+  </Article>
+</BaseLayout>

@@ -1,0 +1,34 @@
+---
+import BaseLayout from "@/src/layouts/BaseLayout.astro";
+import ServicesHero from '@/components/services/ServicesHero';
+import WhyChooseUs from '@/components/services/WhyChooseUs';
+import ServicesFeatures from '@/components/services/ServicesFeatures';
+import ServicesStats from '@/components/services/ServicesStats';
+import FaqCta from '@/components/faq/FaqCta';
+import type { Metadata } from "@/lib/metadata";
+
+const metadata: Metadata = {
+  title: 'Fast Emergency Loans Canada | Same Day Funding | LoanHero',
+  description: 'Need cash fast? LoanHero provides quick emergency loans in Canada with same-day funding and easy online approvals. Apply now to handle unexpected expenses.',
+  alternates: {
+    canonical: 'https://loanhero.ca/services',
+  },
+};
+
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://loanhero.ca" },
+    { "@type": "ListItem", "position": 2, "name": "Emergency Loans & Services", "item": "https://loanhero.ca/services" }
+  ]
+};
+---
+
+<BaseLayout metadata={metadata} deferredJsonLd={[{ id: "services-breadcrumb", data: breadcrumbJsonLd }]}>
+  <ServicesHero client:load />
+  <WhyChooseUs />
+  <ServicesFeatures />
+  <ServicesStats client:load />
+  <FaqCta client:load />
+</BaseLayout>

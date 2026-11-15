@@ -1,0 +1,13 @@
+---
+import ArticlePage from "@/src/components/ArticlePage.astro";
+import { NEWS_SECTION, getAllNews, getNews } from "@/lib/news";
+
+// One page per published item in content/news; anything else is a 404.
+export async function getStaticPaths() {
+  return (await getAllNews()).map((item) => ({ params: { slug: item.slug } }));
+}
+
+const item = (await getNews(Astro.params.slug!))!;
+---
+
+<ArticlePage post={item} section={NEWS_SECTION} kind="news" />

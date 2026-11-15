@@ -1,0 +1,54 @@
+---
+import BaseLayout from "@/src/layouts/BaseLayout.astro";
+import PurposeArticleClient from "@/components/pages/loans/by-purpose/PurposeArticleClient";
+import { loanPurposes, getLoanPurposeBySlug } from "@/lib/loan-purposes";
+import { buildArticleKeywords } from "@/lib/seo-keywords";
+import type { Metadata } from "@/lib/metadata";
+
+// Each page's text lives in lib/loan-purpose-content/<slug>.ts
+export function getStaticPaths() {
+  const modules = import.meta.glob<{ default: any }>("../../../../lib/loan-purpose-content/*.ts", { eager: true });
+  return loanPurposes
+    .filter((entry) => modules["../../../../lib/loan-purpose-content/" + entry.slug + ".ts"])
+    .map((entry) => ({
+      params: { purpose: entry.slug },
+      props: { content: modules["../../../../lib/loan-purpose-content/" + entry.slug + ".ts"].default },
+    }));
+}
+
+const { purpose } = Astro.params;
+const entry = getLoanPurposeBySlug(purpose!)!;
+const { content } = Astro.props;
+
+const title = `${entry.name} Loan Canada | LoanHero`;
+const description = entry.description;
+const url = `https://loanhero.ca/loans/by-purpose/${entry.slug}`;
+const keywords = buildArticleKeywords(`${entry.name} loan`, [
+  `personal loan for ${entry.name.toLowerCase()}`,
+  `${entry.name.toLowerCase()} loan canada`,
+]);
+
+const metadata: Metadata = {
+  title,
+  description,
+  keywords,
+  alternates: {
+    canonical: `/loans/by-purpose/${entry.slug}`,
+  },
+  openGraph: { images: [{ url: "/opengraph-image.png", width: 1200, height: 630 }],
+    type: "article",
+    url,
+    title,
+    description,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
+};
+---
+
+<BaseLayout metadata={metadata}>
+  <PurposeArticleClient client:load entry={entry} content={content} />
+</BaseLayout>

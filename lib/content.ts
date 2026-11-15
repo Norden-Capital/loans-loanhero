@@ -1,6 +1,4 @@
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
+import { getCollection } from "astro:content";
 
 const WORDS_PER_MINUTE = 220;
 
@@ -110,38 +108,40 @@ function normalizeMeta(
   };
 }
 
-/** One content/<folder> directory of .mdx files — used by both the blog and news. */
+/**
+ * One content collection of .mdx files (content/blog or content/news, see
+ * src/content.config.ts) — used by both the blog and news.
+ */
 export function createPostCollection({
-  folder,
+  collection,
   defaultAuthor,
   defaultCategory,
 }: {
-  folder: string;
+  collection: "blog" | "news";
   defaultAuthor: string;
   defaultCategory: string;
 }) {
-  const dir = path.join(process.cwd(), "content", folder);
   const defaults = { author: defaultAuthor, category: defaultCategory };
 
-  function read(slug: string): Post {
-    const { data, content } = matter(fs.readFileSync(path.join(dir, `${slug}.mdx`), "utf8"));
-    return { meta: normalizeMeta(slug, data, content, defaults), content };
+  async function readAll(): Promise<Post[]> {
+    const entries = await getCollection(collection);
+    return entries.map((entry) => {
+      const content = entry.body ?? "";
+      return { meta: normalizeMeta(entry.id, entry.data, content, defaults), content };
+    });
   }
 
   /** Published (non-draft) entries, newest first. */
-  function getAll(): PostMeta[] {
-    if (!fs.existsSync(dir)) return [];
-    return fs
-      .readdirSync(dir)
-      .filter((file) => file.endsWith(".mdx"))
-      .map((file) => read(file.replace(/\.mdx$/, "")).meta)
+  async function getAll(): Promise<PostMeta[]> {
+    return (await readAll())
+      .map((post) => post.meta)
       .filter((meta) => !meta.draft && meta.title)
       .sort((a, b) => (a.date < b.date ? 1 : -1));
   }
 
-  function get(slug: string): Post | null {
-    if (!fs.existsSync(path.join(dir, `${slug}.mdx`))) return null;
-    const post = read(slug);
+  async function get(slug: string): Promise<Post | null> {
+    const post = (await readAll()).find((p) => p.meta.slug === slug);
+    if (!post) return null;
     return post.meta.draft || !post.meta.title ? null : post;
   }
 

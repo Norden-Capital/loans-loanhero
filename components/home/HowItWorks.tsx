@@ -1,6 +1,6 @@
 import React from 'react';
 import { Play } from 'lucide-react';
-import Link from 'next/link';
+import Link from '@/lib/compat/link';
 
 // Premium Inline SVGs
 const FileIcon = ({ className }: { className?: string }) => (

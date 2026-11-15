@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 const CTASection = () => {
   return (
     <section
-      className="py-16 sm:py-20 lg:py-24 relative overflow-hidden"
+      className="article-cta py-16 sm:py-20 lg:py-24 relative overflow-hidden"
       style={{
         background:
           "linear-gradient(135deg, rgba(248, 250, 252, 0.9) 0%, rgba(241, 245, 249, 0.95) 50%, rgba(248, 250, 252, 0.9) 100%)",
@@ -82,8 +82,9 @@ const CTASection = () => {
         </div>
       </div>
 
-      <style jsx>{`
-        button:hover {
+      {/* Was a styled-jsx block scoped to this section; same rule, scoped by class. */}
+      <style>{`
+        .article-cta button:hover {
           background-color: #4F46E5 !important;
           transform: scale(1.05);
         }

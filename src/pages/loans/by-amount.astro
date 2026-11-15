@@ -1,0 +1,17 @@
+---
+import BaseLayout from "@/src/layouts/BaseLayout.astro";
+import LoansByAmountClient from "@/components/pages/loans/by-amount/LoansByAmountClient";
+import type { Metadata } from "@/lib/metadata";
+
+const metadata: Metadata = {
+  title: "Loans by Amount | LoanHero Canada",
+  description: "Find out exactly what it costs to borrow the amount you need in Canada, from $300 to $5,000.",
+  alternates: {
+    canonical: '/loans/by-amount',
+  },
+};
+---
+
+<BaseLayout metadata={metadata}>
+  <LoansByAmountClient client:load />
+</BaseLayout>

@@ -1,0 +1,37 @@
+/* Same fonts as the old next/font setup: Poppins 300–900 and Space Grotesk 400–700,
+   self-hosted, font-display: swap, with the same metric-matched fallbacks so text
+   does not jump while the fonts load. */
+@import "@fontsource/poppins/300.css";
+@import "@fontsource/poppins/400.css";
+@import "@fontsource/poppins/500.css";
+@import "@fontsource/poppins/600.css";
+@import "@fontsource/poppins/700.css";
+@import "@fontsource/poppins/800.css";
+@import "@fontsource/poppins/900.css";
+@import "@fontsource/space-grotesk/400.css";
+@import "@fontsource/space-grotesk/500.css";
+@import "@fontsource/space-grotesk/600.css";
+@import "@fontsource/space-grotesk/700.css";
+
+@font-face {
+  font-family: "Poppins Fallback";
+  src: local("Arial");
+  ascent-override: 93.62%;
+  descent-override: 31.21%;
+  line-gap-override: 8.92%;
+  size-adjust: 112.16%;
+}
+
+@font-face {
+  font-family: "Space Grotesk Fallback";
+  src: local("Arial");
+  ascent-override: 89.71%;
+  descent-override: 26.62%;
+  line-gap-override: 0%;
+  size-adjust: 109.69%;
+}
+
+.font-vars {
+  --font-poppins: "Poppins", "Poppins Fallback";
+  --font-space-grotesk: "Space Grotesk", "Space Grotesk Fallback";
+}

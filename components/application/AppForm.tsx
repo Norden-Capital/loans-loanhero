@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from 'react';
-import Script from 'next/script';
-import { useSearchParams } from 'next/navigation';
+import Script from '@/lib/compat/script';
+import { useSearchParams } from '@/lib/compat/navigation';
 
 declare global {
   interface Window {

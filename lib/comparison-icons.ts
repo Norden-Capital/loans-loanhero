@@ -1,5 +1,5 @@
 import {
-  LucideIcon,
+  type LucideIcon,
   Banknote,
   Scale,
   Shield,

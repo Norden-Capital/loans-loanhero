@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import Link from "next/link";
+import Link from "@/lib/compat/link";
 import { ArrowUpRight, Newspaper } from "lucide-react";
 
 import { formatDate, type ArticleSection, type PostMeta } from "@/lib/content";

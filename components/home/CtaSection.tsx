@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'next/link';
+import Link from '@/lib/compat/link';
 import { Rocket, CheckCircle2 } from 'lucide-react';
 
 const CtaSection = () => {

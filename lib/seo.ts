@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata } from "@/lib/metadata";
 
 import type { ArticleSection, FaqItem, PostMeta } from "@/lib/content";
 

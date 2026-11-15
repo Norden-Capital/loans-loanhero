@@ -15,7 +15,7 @@ export const BLOG_SECTION: ArticleSection = {
 };
 
 const blog = createPostCollection({
-  folder: "blog",
+  collection: "blog",
   defaultAuthor: "LoanHero Editorial Team",
   defaultCategory: "Article",
 });

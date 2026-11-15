@@ -1,9 +1,10 @@
-import Link from "next/link";
+import Link from "@/lib/compat/link";
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
 import { ArrowUpRight } from "lucide-react";
+import type { ReactNode } from "react";
 
 import { Breadcrumbs } from "@/components/blog/breadcrumbs";
 import { PostImage } from "@/components/blog/post-image";
@@ -14,8 +15,23 @@ import { formatDate, type ArticleSection, type Post } from "@/lib/content";
 import { articleJsonLd, breadcrumbJsonLd, faqJsonLd } from "@/lib/seo";
 import { extractToc } from "@/lib/toc";
 
-/** Full article page, shared by blog posts and news items. */
-export function Article({ post, section }: { post: Post; section: ArticleSection }) {
+/**
+ * Full article page, shared by blog posts and news items.
+ *
+ * The page renders as plain HTML. Only the two tables of contents are
+ * interactive; Astro passes them in hydrated (`tocMobile` / `tocSidebar`).
+ */
+export function Article({
+  post,
+  section,
+  tocMobile,
+  tocSidebar,
+}: {
+  post: Post;
+  section: ArticleSection;
+  tocMobile?: ReactNode;
+  tocSidebar?: ReactNode;
+}) {
   const { meta, content } = post;
   const path = `${section.path}/${meta.slug}`;
   const toc = extractToc(content);
@@ -80,7 +96,7 @@ export function Article({ post, section }: { post: Post; section: ArticleSection
       <section className="relative z-10 pb-16 lg:pb-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 lg:grid lg:grid-cols-[minmax(0,1fr)_15rem] lg:gap-12 lg:items-start">
           <article className="min-w-0 w-full max-w-3xl mx-auto lg:mx-0">
-            <TableOfContents items={toc} variant="mobile" />
+            {tocMobile ?? <TableOfContents items={toc} variant="mobile" />}
             <div className="blog-prose prose prose-lg max-w-none">
               {/* rehype-raw lets posts embed HTML (figures, video, iframes);
                   rehype-slug gives headings the ids the table of contents uses. */}
@@ -156,7 +172,7 @@ export function Article({ post, section }: { post: Post; section: ArticleSection
           </article>
 
           <aside className="hidden lg:block sticky top-28 self-start">
-            <TableOfContents items={toc} variant="sidebar" />
+            {tocSidebar ?? <TableOfContents items={toc} variant="sidebar" />}
           </aside>
         </div>
       </section>

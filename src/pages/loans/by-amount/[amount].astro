@@ -1,0 +1,47 @@
+---
+import BaseLayout from "@/src/layouts/BaseLayout.astro";
+import AmountLoanClient from "@/components/pages/loans/by-amount/AmountLoanClient";
+import { loanAmounts, getLoanAmountBySlug } from "@/lib/loan-amounts";
+import { buildArticleKeywords } from "@/lib/seo-keywords";
+import type { Metadata } from "@/lib/metadata";
+
+export function getStaticPaths() {
+  return loanAmounts.map((entry) => ({ params: { amount: entry.slug } }));
+}
+
+const { amount } = Astro.params;
+const entry = getLoanAmountBySlug(amount!)!;
+
+const title = `$${entry.amount} Loan Canada — Borrow Today (2026) | LoanHero`;
+const description = `Need to borrow $${entry.amount} today in Canada? Apply online in 2 minutes for same-day funding. Bad credit OK, APR capped at 35%.`;
+const url = `https://loanhero.ca/loans/by-amount/${entry.slug}`;
+const keywords = buildArticleKeywords(`$${entry.amount} loan`, [
+  `borrow $${entry.amount}`,
+  `$${entry.amount} loan canada`,
+  `same day $${entry.amount} loan`,
+]);
+
+const metadata: Metadata = {
+  title,
+  description,
+  keywords,
+  alternates: {
+    canonical: `/loans/by-amount/${entry.slug}`,
+  },
+  openGraph: { images: [{ url: "/opengraph-image.png", width: 1200, height: 630 }],
+    type: "article",
+    url,
+    title,
+    description,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
+};
+---
+
+<BaseLayout metadata={metadata}>
+  <AmountLoanClient client:load entry={entry} />
+</BaseLayout>
